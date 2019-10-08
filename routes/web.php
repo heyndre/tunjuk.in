@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
-Route::get('dash', function () {
-  return view('dashboard');
+Route::get('welcome', function () {
+  return view('welcome');
 });
 
 Auth::routes();
@@ -24,3 +24,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('hotel_admin', 'HotelController');
+
+Route::get('Daftar_Hotel', 'HotelCatalog@index');
+Route::get('Detail_Hotel/{id}', 'HotelCatalog@show');

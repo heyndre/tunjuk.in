@@ -18,9 +18,10 @@ class HotelController extends Controller
       $hotels = HotelModel::all();
       // echo "<pre>";
       // var_dump($hotels);
-        return view ('admin_hotel_list', [
-          'data' => $hotels
-        ]);
+      return view ('admin_hotel_list', [
+        'data' => $hotels
+      ]);
+
     }
 
     /**
