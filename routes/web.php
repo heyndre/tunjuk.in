@@ -23,12 +23,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('list_hotel_admin', function () {
-  return view('admin_hotel_list');
-});
-
-Route::get('tambah_hotel_admin', function () {
-  return view('admin_hotel_tambah');
-});
-
 Route::resource('hotel_admin', 'HotelController');

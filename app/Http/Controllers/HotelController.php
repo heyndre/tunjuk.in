@@ -16,9 +16,11 @@ class HotelController extends Controller
     public function index()
     {
       $hotels = HotelModel::all();
-      echo "<pre>";
-      var_dump($hotels);
-        // return view ('admin_hotel_list');
+      // echo "<pre>";
+      // var_dump($hotels);
+        return view ('admin_hotel_list', [
+          'data' => $hotels
+        ]);
     }
 
     /**
@@ -28,7 +30,9 @@ class HotelController extends Controller
      */
     public function create()
     {
-        //
+        return view ('admin_hotel_tambah', [
+          'data' => new HotelModel(),
+        ]);
     }
 
     /**
@@ -39,7 +43,21 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $hotel = new HotelModel();
+        $hotel->nama = $request->input('namaHotel');
+        $hotel->alamat = $request->input('alamatHotel');
+        $hotel->kecamatan = $request->input('kecamatanHotel');
+        $hotel->kode_pos = $request->input('kodePosHotel');
+        $hotel->kota = $request->input('kotaHotel');
+        $hotel->latitude = $request->input('lintangHotel');
+        $hotel->longitude = $request->input('bujurHotel');
+        $hotel->tarif_atas = $request->input('tarifAtas');
+        $hotel->tarif_bawah = $request->input('tarifBawah');
+        $hotel->verified = $request->input('verify');
+
+        // dd($request->all());
+        $hotel->save();
+        return redirect('/hotel_admin');
     }
 
     /**
@@ -61,7 +79,9 @@ class HotelController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view ('admin_hotel_ubah', [
+          'data' => HotelModel::findOrFail($id)
+        ]);
     }
 
     /**
@@ -73,7 +93,20 @@ class HotelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $hotel = HotelModel::findOrFail($id);
+      $hotel->nama = $request->input('namaHotel');
+      $hotel->alamat = $request->input('alamatHotel');
+      $hotel->kecamatan = $request->input('kecamatanHotel');
+      $hotel->kode_pos = $request->input('kodePosHotel');
+      $hotel->kota = $request->input('kotaHotel');
+      $hotel->latitude = $request->input('lintangHotel');
+      $hotel->longitude = $request->input('bujurHotel');
+      $hotel->tarif_atas = $request->input('tarifAtas');
+      $hotel->tarif_bawah = $request->input('tarifBawah');
+      $hotel->verified = $request->input('verify');
+
+      $hotel->save();
+        return redirect('/hotel_admin');
     }
 
     /**
@@ -84,6 +117,8 @@ class HotelController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $hotel = HotelModel::findOrFail($id);
+        $hotel->delete();
+        return redirect('/hotel_admin');
     }
 }

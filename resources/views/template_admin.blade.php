@@ -228,7 +228,7 @@
         <li class="header">Administrasi</li>
         <!-- Dashboard -->
         <li class="treeview">
-          <a href="dash">
+          <a href="/home">
             <i class="fa fa-dashboard"></i> <span>Menu Utama</span>
             <!-- <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -250,15 +250,15 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="list_hotel_admin"><i class="fa fa-circle-o"></i> Hotel</a></li>
-            <li><a href="list_wisata_admin"><i class="fa fa-circle-o"></i> Tempat Wisata</a></li>
-            <li><a href="list_kuliner_admin"><i class="fa fa-circle-o"></i> Kuliner</a></li>
+            <li><a href="/hotel_admin"><i class="fa fa-circle-o"></i> Hotel</a></li>
+            <li><a href="/wisata_admin"><i class="fa fa-circle-o"></i> Tempat Wisata</a></li>
+            <li><a href="/kuliner_admin"><i class="fa fa-circle-o"></i> Kuliner</a></li>
             <!-- <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li> -->
           </ul>
         </li>
         <!-- Pengguna -->
         <li>
-          <a href="../widgets.html">
+          <a href="/pengguna">
             <i class="fa fa-th"></i> <span>Pengguna</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">@yield ('jumlah_pengguna')</small>

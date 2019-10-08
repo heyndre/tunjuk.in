@@ -19,14 +19,12 @@ class CreateHotelTable extends Migration
             $table->string('nama');
             $table->text('alamat');
             $table->string('kecamatan');
-            $table->string('kode pos');
+            $table->string('kode_pos');
             $table->string('kota');
             $table->string('latitude');
             $table->string('longitude');
             $table->integer('tarif_atas');
             $table->integer('tarif_bawah');
-            $table->time('jam_buka');
-            $table->time('jam_tutup');
             $table->tinyInteger('verified')->default(0);
         });
     }
