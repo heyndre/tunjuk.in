@@ -25,15 +25,13 @@ Ubah Hotel
     <div class="box-header with-border">
       <h3 class="box-title">Kelola Data Hotel</h3>
 
-      <div class="box-tools pull-right">
-        <a href="/hotel_admin" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i>Batal</a>
-        <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-          <i class="fa fa-times"></i></button> -->
-      </div>
+      <!-- <div class="box-tools pull-right">
+        <a href="/hotel_admin" class="btn btn-box-tool"><i class="fa fa-plus-cross"></i>Batal</a>
+      </div> -->
     </div>
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Ubah Hotel</h3>
+        <h3 class="box-title">Ubah Data Hotel {{$data->nama}}</h3>
       </div>
 
       <div class="box-body">
@@ -41,6 +39,13 @@ Ubah Hotel
           @method('PUT')
           @csrf
           <div class="box-body">
+            <label for="exampleInputFile">Gambar Hotel</label>
+            <div class="form-group">
+                <img src="{{asset('image/hotel/'.$data->image)}}" height="300px">
+                <input type="file" name="gambarHotel" id="gambarHotel">
+              <p class="help-block">Ubah gambar hotel</p>
+            </div>
+          </div>
             <div class="form-group">
               <label for="namaHotel">Nama Hotel</label>
               <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel" value="{{ $data->nama}}">
@@ -77,13 +82,6 @@ Ubah Hotel
               <label for="tarifBawah">Tarif Bawah</label>
               <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" value="{{ $data->tarif_bawah}}">
             </div>
-            <!-- <div class="form-group">
-              <label for="exampleInputFile">File input</label>
-              <input type="file" id="exampleInputFile">
-
-              <p class="help-block">Example block-level help text here.</p>
-            </div> -->
-
           <div class="form-group">
             @if($data->verified=='1')
             <div class="radio">
@@ -116,13 +114,24 @@ Ubah Hotel
 
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Simpan</button>
-            <form id="hapus" method="post" action="" style="display:none;">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="btn btn-default" onclick="clicked(event)"> HAPUS </button>
-            </form>
           </div>
         </form>
+        <div class="box-footer">
+          <label>
+            <a href="/hotel_admin">
+          <input type="button" class="btn btn-secondary" value="Batal">
+        </a>
+          </label>
+        </div>
+        <div>
+          <form id="hapus" method="post" action="{{ route('hotel_admin.destroy', ['hotel' => $data->id])}}" style="">
+            @csrf
+            @method('DELETE')
+            <div class="box-footer">
+            <button type="submit" class="btn btn-warning" onclick="clicked(event)"> HAPUS </button>
+          </div>
+          </form>
+        </div>
       </div>
       <!-- /.box-body -->
     </div>

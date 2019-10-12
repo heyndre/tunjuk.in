@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\HotelModel;
+use Image;
 
 class HotelController extends Controller
 {
@@ -44,20 +45,50 @@ class HotelController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, array(
+          'namaHotel' => 'required',
+          'alamatHotel' => 'required',
+          'kecamatanHotel' => 'required',
+          'kodePosHotel' => 'required',
+          'lintangHotel' => 'required',
+          'bujurHotel' => 'required',
+          'tarifAtas' => 'required|integer',
+          'tarifBawah' => 'required|integer',
+          'deskripsiHotel' => 'required',
+          'verify' => 'required',
+        ));
+
         $hotel = new HotelModel();
         $hotel->nama = $request->input('namaHotel');
         $hotel->alamat = $request->input('alamatHotel');
         $hotel->kecamatan = $request->input('kecamatanHotel');
         $hotel->kode_pos = $request->input('kodePosHotel');
-        $hotel->kota = $request->input('kotaHotel');
+        $hotel->kota = 'Jember';
         $hotel->latitude = $request->input('lintangHotel');
         $hotel->longitude = $request->input('bujurHotel');
         $hotel->tarif_atas = $request->input('tarifAtas');
         $hotel->tarif_bawah = $request->input('tarifBawah');
+        $hotel->deskripsi = $request->input('deskripsiHotel');
         $hotel->verified = $request->input('verify');
 
+        //Save image
+        if ($request->hasfile('gambarHotel')) {
+          $image = $request->file('gambarHotel');
+          $filename = time() . $image->getClientOriginalName();
+          $location = public_path('image/hotel/'.$filename);
+          Image::make($image)->save($location);
+
+          $hotel->image = $filename;
+        }
+
         // dd($request->all());
-        $hotel->save();
+        try {
+          $hotel->save();
+        } catch (Exception $e) {
+          report($e);
+          return false;
+        }
+
         return redirect('/hotel_admin');
     }
 
@@ -99,11 +130,12 @@ class HotelController extends Controller
       $hotel->alamat = $request->input('alamatHotel');
       $hotel->kecamatan = $request->input('kecamatanHotel');
       $hotel->kode_pos = $request->input('kodePosHotel');
-      $hotel->kota = $request->input('kotaHotel');
+      $hotel->kota = 'Jember';
       $hotel->latitude = $request->input('lintangHotel');
       $hotel->longitude = $request->input('bujurHotel');
       $hotel->tarif_atas = $request->input('tarifAtas');
       $hotel->tarif_bawah = $request->input('tarifBawah');
+      $hotel->deskripsi = $request->input('deskripsiHotel');
       $hotel->verified = $request->input('verify');
 
       $hotel->save();

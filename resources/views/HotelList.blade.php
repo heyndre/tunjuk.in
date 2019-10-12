@@ -22,7 +22,7 @@ Daftar Hotel
     @foreach ($data as $key => $value)
   <div class="col-sm col-md-6 col-lg-4 ftco-animate">
   		    				<div class="destination">
-  		    					<a href="/Detail_Hotel/{{$value->id}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(images/hotel-1.jpg);">
+  		    					<a href="/Detail_Hotel/{{$value->id}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(image/hotel/{{$value->image}});">
   		    						<div class="icon d-flex justify-content-center align-items-center">
   		    							<span class="icon-link"></span>
   		    						</div>
@@ -36,7 +36,7 @@ Daftar Hotel
   				    						</p>
   			    						</div>
   			    						<div class="two">
-  			    							<span class="price per-price">{{$value->tarif_bawah}}<br><small>Mulai dari</small></span>
+  			    							<span class="price per-price">Rp.{{$value->tarif_bawah}} <br><small>Mulai dari</small></span>
   		    							</div>
   		    						</div>
   		    						<p>{{$value->alamat}}</p>

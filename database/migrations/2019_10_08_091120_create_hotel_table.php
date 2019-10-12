@@ -25,6 +25,7 @@ class CreateHotelTable extends Migration
             $table->string('longitude');
             $table->integer('tarif_atas');
             $table->integer('tarif_bawah');
+            $table->deskripsi('deskripsiHotel');
             $table->tinyInteger('verified')->default(0);
         });
     }

@@ -3,7 +3,7 @@
 @extends ('template_user')
 
 @section ('page_title')
-Beranda - Tunjuk.input
+Beranda
 @endsection
 
 @section ('content')
@@ -12,8 +12,9 @@ Beranda - Tunjuk.input
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
       <div class="col-md-9 ftco-animate mb-5 pb-5 text-center text-md-left" data-scrollax=" properties: { translateY: '70%' }">
-        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Discover <br>A new Place</h1>
-        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Find great places to stay, eat, shop, or visit from local experts</p>
+        <h1 class="mb-4" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Mulai liburanmu <br>di kota Jember</h1>
+        <p data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Cukup masukkan jenis liburan, durasi, serta biaya yang kamu miliki - <br>
+        tanpa bingung mencari tempat tujuan</p>
       </div>
     </div>
   </div>
@@ -24,11 +25,16 @@ Beranda - Tunjuk.input
     <div class="row no-gutters">
       <div class="col-md-12 nav-link-wrap">
         <div class="nav nav-pills justify-content-center text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-          <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Flight</a>
+          <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Pantai</a>
 
-          <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Hotel</a>
+          <a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Air Terjun</a>
 
-          <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Car Rent</a>
+          <a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3" aria-selected="false">Bukit / Dataran Tinggi</a>
+
+          <a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-5" aria-selected="false">Taman</a>
+
+          <a class="nav-link" id="v-pills-5-tab" data-toggle="pill" href="#v-pills-5" role="tab" aria-controls="v-pills-5" aria-selected="false">Bangunan Unik</a>
+
         </div>
       </div>
       <div class="col-md-12 tab-wrap">
@@ -40,25 +46,7 @@ Beranda - Tunjuk.input
               <div class="row">
                 <div class="col-md align-items-end">
                   <div class="form-group">
-                    <label for="#">From</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-my_location"></span></div>
-                      <input type="text" class="form-control" placeholder="From">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Where</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control" placeholder="Where">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Check In</label>
+                    <label for="#">Tanggal mulai</label>
                     <div class="form-field">
                       <div class="icon"><span class="icon-map-marker"></span></div>
                       <input type="text" class="form-control checkin_date" placeholder="Check In">
@@ -67,7 +55,7 @@ Beranda - Tunjuk.input
                 </div>
                 <div class="col-md align-items-end">
                   <div class="form-group">
-                    <label for="#">Check Out</label>
+                    <label for="#">Tanggal selesai</label>
                     <div class="form-field">
                       <div class="icon"><span class="icon-map-marker"></span></div>
                       <input type="text" class="form-control checkout_date" placeholder="From">
@@ -76,18 +64,28 @@ Beranda - Tunjuk.input
                 </div>
                 <div class="col-md align-items-end">
                   <div class="form-group">
-                    <label for="#">Travelers</label>
+                    <label for="#">Jumlah pelancong</label>
                     <div class="form-field">
                       <div class="select-wrap">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
                         <select name="" id="" class="form-control">
-                          <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4</option>
-                          <option value="">5</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
                         </select>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md align-items-end">
+                  <div class="form-group">
+                    <label for="#">Biaya yang disiapkan</label>
+                    <div class="form-field">
+                      <div class="range-slider">
+                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+    										</div>
                     </div>
                   </div>
                 </div>

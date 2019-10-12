@@ -2018,6 +2018,10 @@ a.btn.disabled,
 fieldset:disabled a.btn {
   pointer-events: none; }
 
+.btn-red {
+  color: red;
+}
+
 .btn-primary {
   color: #212529;
   background-color: #78d5ef;

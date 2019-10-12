@@ -45,6 +45,11 @@ Tambah Hotel
               <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel">
             </div>
             <div class="form-group">
+              <label for="exampleInputFile">Gambar Hotel</label>
+              <input type="file" name="gambarHotel" id="gambarHotel">
+              <p class="help-block">Masukkan gambar hotel</p>
+            </div>
+            <div class="form-group">
               <label for="alamatHotel">Alamat</label>
               <input type="text" class="form-control" name="alamatHotel" accept=""id="alamatHotel" placeholder="Alamat Hotel">
             </div>
@@ -76,12 +81,10 @@ Tambah Hotel
               <label for="tarifBawah">Tarif Bawah</label>
               <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" >
             </div>
-            <!-- <div class="form-group">
-              <label for="exampleInputFile">File input</label>
-              <input type="file" id="exampleInputFile">
-
-              <p class="help-block">Example block-level help text here.</p>
-            </div> -->
+            <div class="form-group">
+  <label>Deskripsi</label>
+  <textarea class="form-control" rows="3" name="deskripsiHotel" id="deskripsiHotel" placeholder="Deskripsi Hotel"></textarea>
+</div>
             <div class="form-group">
               <div class="radio">
                 <label>
@@ -101,6 +104,14 @@ Tambah Hotel
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </form>
+        <!-- <form>
+          <div class="form-group">
+            <label for="exampleInputFile">Gambar Hotel</label>
+            <input type="file" id="exampleInputFile">
+
+            <p class="help-block">Masukkan gambar hotel</p>
+          </div>
+        </form> -->
       </div>
       <!-- /.box-body -->
     </div>

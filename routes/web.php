@@ -27,3 +27,6 @@ Route::resource('hotel_admin', 'HotelController');
 
 Route::get('Daftar_Hotel', 'HotelCatalog@index');
 Route::get('Detail_Hotel/{id}', 'HotelCatalog@show');
+
+Route::get('/upload', 'UploadController@upload');
+Route::post('/upload/proses', 'UploadController@proses_upload');
