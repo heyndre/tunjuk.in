@@ -58,6 +58,16 @@ Ubah Hotel
               <label for="kecamatanHotel">Kecamatan</label>
               <input type="text" class="form-control" name="kecamatanHotel" id="kecamatanHotel" placeholder="Kecamatan Hotel" value="{{ $data->kecamatan}}">
             </div>
+            <!-- <div class="form-group">
+              <label>Select</label>
+              <select class="form-control">
+                <option>option 1</option>
+                <option>option 2</option>
+                <option>option 3</option>
+                <option>option 4</option>
+                <option>option 5</option>
+              </select> -->
+            </div>
             <div class="form-group">
               <label for="kodePosHotel">Kode Pos</label>
               <input type="text" class="form-control" name="kodePosHotel" id="kodePosHotel" placeholder="Kode Pos Hotel" value="{{ $data->kode_pos}}">
@@ -81,6 +91,10 @@ Ubah Hotel
             <div class="form-group">
               <label for="tarifBawah">Tarif Bawah</label>
               <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" value="{{ $data->tarif_bawah}}">
+            </div>
+            <div class="form-group">
+              <label>Deskripsi</label>
+              <textarea class="form-control" rows="3" name="deskripsiHotel" id="deskripsiHotel" placeholder="Deskripsi Hotel">{{ $data->deskripsi}}</textarea>
             </div>
           <div class="form-group">
             @if($data->verified=='1')

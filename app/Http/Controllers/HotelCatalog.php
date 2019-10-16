@@ -8,7 +8,7 @@ use App\HotelModel;
 class HotelCatalog extends Controller
 {
   public function index () {
-    $hotels = HotelModel::all();
+    $hotels = HotelModel::where('verified','1')->get();
     return view ('HotelList', [
       'data' => $hotels
     ]);

@@ -1,7 +1,7 @@
 @extends ('template_admin')
 
 @section ('page_title')
-Daftar Hotel
+Daftar Tempat Kuliner
 @endsection
 
 @section ('Username')
@@ -23,17 +23,17 @@ Daftar Hotel
   <!-- Default box -->
   <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Kelola Data Hotel</h3>
+      <h3 class="box-title">Kelola Data Tempat Kuliner</h3>
 
       <div class="box-tools pull-right">
-        <a href="/hotel_admin/create" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Hotel</a>
+        <a href="/kuliner_admin/create" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Tempat Kuliner</a>
         <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
           <i class="fa fa-times"></i></button> -->
       </div>
     </div>
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Daftar Hotel</h3>
+        <h3 class="box-title">Daftar Tempat Kuliner</h3>
       </div>
       <!-- /.box-header -->
       <div class="box-body" style="overflow-x:auto;">
@@ -42,7 +42,7 @@ Daftar Hotel
           <tr>
             <th>Nomor</th>
             <th>Tampilan</th>
-            <th>Nama Hotel</th>
+            <th>Nama Tempat Kuliner</th>
             <th>Alamat</th>
             <th>Kecamatan</th>
             <th>Kode Pos</th>
@@ -61,7 +61,7 @@ Daftar Hotel
             @foreach ($data as $key => $value)
             <tr>
               <th>{{++$number}}</th>
-              <th><img src="{{asset('image/hotel/'.$value->image)}}" height="50px"></th>
+              <th><img src="{{asset('image/kuliner/'.$value->image)}}" height="50px"></th>
               <th>{{$value->nama}}</th>
               <th>{{$value->alamat}}</th>
               <th>{{$value->kecamatan}}</th>
@@ -77,7 +77,7 @@ Daftar Hotel
                   @endif
               </th>
               <th>
-                <a href="{{ route('hotel_admin.edit', ['hotel_admin' => $value->id])}}">Ubah / Hapus</a>
+                <a href="{{ route('kuliner_admin.edit', ['kuliner_admin' => $value->id])}}">Ubah / Hapus</a>
                 <!-- <br> -->
                 <!-- <a href="#" onclick="event.preventDefault(); if(confirm('Konfirmasi Penghapusan Data')) {$('form#hapus').attr('action', '{{ route('hotel_admin.destroy', ['hotel_admin' => $value->id])}}').submit(); location.reload();}">Hapus</a> -->
               </th>
@@ -87,7 +87,7 @@ Daftar Hotel
             <tr>
               <th>Nomor</th>
               <th>Tampilan</th>
-              <th>Nama Hotel</th>
+              <th>Nama Tempat Kuliner</th>
               <th>Alamat</th>
               <th>Kecamatan</th>
               <th>Kode Pos</th>

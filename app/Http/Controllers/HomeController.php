@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+      $nama = Auth::user()->name;
+      $priv = Auth::user()->privileged;
+      if ($priv=='1') {
+        return view('dashboard');
+      }  elseif ($priv=='0') {
+        return view('index');
+      }
+    }
+    public function indexAdmin()
+    {
+      return redirect('dashboard');
+    }
+    public function indexPublic()
+    {
+      return redirect('index');
     }
 }

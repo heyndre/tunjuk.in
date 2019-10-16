@@ -191,7 +191,9 @@ caption {
   caption-side: bottom; }
 
 th {
-  text-align: inherit; }
+  text-align: inherit;
+    white-space: nowrap;
+ }
 
 label {
   display: inline-block;
@@ -1340,8 +1342,11 @@ pre {
   .offset-xl-11 {
     margin-left: 91.66667%; } }
 
+
+
 .table {
   width: 100%;
+  height: 50px;
   max-width: 100%;
   margin-bottom: 1rem;
   background-color: transparent; }

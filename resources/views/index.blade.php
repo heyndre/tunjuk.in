@@ -1,5 +1,4 @@
-
-<? php $priv = '' ?>
+<!-- <? php $priv = '' ?> -->
 @extends ('template_user')
 
 @section ('page_title')
@@ -49,7 +48,7 @@ Beranda
                     <label for="#">Tanggal mulai</label>
                     <div class="form-field">
                       <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkin_date" placeholder="Check In">
+                      <input type="text" class="form-control checkin_date" placeholder="Mulai">
                     </div>
                   </div>
                 </div>
@@ -58,7 +57,7 @@ Beranda
                     <label for="#">Tanggal selesai</label>
                     <div class="form-field">
                       <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkout_date" placeholder="From">
+                      <input type="text" class="form-control checkout_date" placeholder="Selesai">
                     </div>
                   </div>
                 </div>
@@ -82,10 +81,9 @@ Beranda
                 <div class="col-md align-items-end">
                   <div class="form-group">
                     <label for="#">Biaya yang disiapkan</label>
-                    <div class="form-field">
-                      <div class="range-slider">
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-    										</div>
+                    <div class="slidecontainer">
+                        <input type="range" min="100000" max="1000000" value="250000" class="slider" name="biaya" id="myRange" step="50000">
+                        <p>Biaya: Rp.<span id="demo"></span></p>
                     </div>
                   </div>
                 </div>
@@ -193,5 +191,15 @@ Beranda
       </div>
     </div>
   </div>
+
+  <script>
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("demo");
+    output.innerHTML = slider.value;
+
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+    }
+  </script>
 </section>
 @endsection

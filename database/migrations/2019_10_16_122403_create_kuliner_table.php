@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHotelTable extends Migration
+class CreateKulinerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateHotelTable extends Migration
      */
     public function up()
     {
-        Schema::create('hotel', function (Blueprint $table) {
+        Schema::create('kuliner', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
             $table->string('nama');
@@ -28,7 +28,6 @@ class CreateHotelTable extends Migration
             $table->string('deskripsi');
             $table->tinyInteger('verified')->default(0);
         });
-
     }
 
     /**
@@ -38,6 +37,6 @@ class CreateHotelTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotel');
+        Schema::dropIfExists('kuliner');
     }
 }

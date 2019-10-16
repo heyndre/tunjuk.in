@@ -30,3 +30,8 @@ Route::get('Detail_Hotel/{id}', 'HotelCatalog@show');
 
 Route::get('/upload', 'UploadController@upload');
 Route::post('/upload/proses', 'UploadController@proses_upload');
+
+Route::resource('kuliner_admin', 'KulinerController');
+
+Route::get('Daftar_Kuliner', 'KulinerCatalog@index');
+Route::get('Detail_Kuliner/{id}', 'KulinerCatalog@show');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\HotelModel;
+use App\KecamatanModel;
 use Image;
 
 class HotelController extends Controller
@@ -32,8 +33,9 @@ class HotelController extends Controller
      */
     public function create()
     {
+        $DaftarKecamatan = KecamatanModel::all();
         return view ('admin_hotel_tambah', [
-          'data' => new HotelModel(),
+          'data' => new HotelModel(), 'kec' => $DaftarKecamatan
         ]);
     }
 
@@ -138,7 +140,22 @@ class HotelController extends Controller
       $hotel->deskripsi = $request->input('deskripsiHotel');
       $hotel->verified = $request->input('verify');
 
-      $hotel->save();
+      if ($request->hasfile('gambarHotel')) {
+        $image = $request->file('gambarHotel');
+        $filename = time() . $image->getClientOriginalName();
+        $location = public_path('image/hotel/'.$filename);
+        Image::make($image)->save($location);
+
+        $hotel->image = $filename;
+      }
+
+      try {
+        $hotel->save();
+      } catch (Exception $e) {
+        report($e);
+        return false;
+      }
+
         return redirect('/hotel_admin');
     }
 
