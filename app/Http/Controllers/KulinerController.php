@@ -112,8 +112,9 @@ class KulinerController extends Controller
      */
     public function edit($id)
     {
+      $DaftarKecamatan = KecamatanModel::all();
       return view ('admin_kuliner_ubah', [
-        'data' => KulinerModel::findOrFail($id)
+        'data' => KulinerModel::findOrFail($id), 'kec' => $DaftarKecamatan
       ]);    }
 
     /**

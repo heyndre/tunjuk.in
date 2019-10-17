@@ -1,4 +1,3 @@
-<!-- <? php $priv = '' ?> -->
 @extends ('template_user')
 
 @section ('page_title')

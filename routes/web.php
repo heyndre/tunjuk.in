@@ -35,3 +35,15 @@ Route::resource('kuliner_admin', 'KulinerController');
 
 Route::get('Daftar_Kuliner', 'KulinerCatalog@index');
 Route::get('Detail_Kuliner/{id}', 'KulinerCatalog@show');
+
+Route::resource('kategori_admin', 'CategoryController');
+
+Route::get('/migrate', function() {
+    $exitCode = Artisan::call('migrate --seed');
+    return 'DONE'; //Return anything
+});
+
+Route::get('/migrate-reset', function() {
+    $exitCode = Artisan::call('migrate-reset --seed');
+    return 'DONE'; //Return anything
+});

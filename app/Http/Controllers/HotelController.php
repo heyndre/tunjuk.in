@@ -113,8 +113,9 @@ class HotelController extends Controller
      */
     public function edit($id)
     {
+      $DaftarKecamatan = KecamatanModel::all();
         return view ('admin_hotel_ubah', [
-          'data' => HotelModel::findOrFail($id)
+          'data' => HotelModel::findOrFail($id), 'kec' => $DaftarKecamatan
         ]);
     }
 

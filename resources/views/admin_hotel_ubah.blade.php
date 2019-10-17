@@ -54,19 +54,21 @@ Ubah Hotel
               <label for="alamatHotel">Alamat</label>
               <input type="text" class="form-control" name="alamatHotel" accept=""id="alamatHotel" placeholder="Alamat Hotel" value="{{ $data->alamat}}">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="kecamatanHotel">Kecamatan</label>
               <input type="text" class="form-control" name="kecamatanHotel" id="kecamatanHotel" placeholder="Kecamatan Hotel" value="{{ $data->kecamatan}}">
-            </div>
-            <!-- <div class="form-group">
-              <label>Select</label>
-              <select class="form-control">
-                <option>option 1</option>
-                <option>option 2</option>
-                <option>option 3</option>
-                <option>option 4</option>
-                <option>option 5</option>
-              </select> -->
+            </div> -->
+            <div class="form-group">
+              <label>Kecamatan</label>
+              <select name="kecamatanHotel" id="kecamatanHotel" class="form-control" value="{{ $data->kecamatan}}">
+                @foreach ($kec as $key => $kcm)
+                @if ($kcm->nama_kecamatan == $data->kecamatan)
+                <option value="{{$kcm->nama_kecamatan}}" selected>{{$kcm->nama_kecamatan}}</option>
+                @else
+                <option value="{{$kcm->nama_kecamatan}}">{{$kcm->nama_kecamatan}}</option>
+                @endif
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
               <label for="kodePosHotel">Kode Pos</label>

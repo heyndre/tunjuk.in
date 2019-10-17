@@ -74,8 +74,8 @@
 	        <ul class="navbar-nav ml-auto">
 	          <li class="nav-item active"><a href="/" class="nav-link">Beranda - Rekomendasi</a></li>
 	          <li class="nav-item"><a href="Daftar_Hotel" class="nav-link">Hotel</a></li>
-	          <li class="nav-item"><a href="places.html" class="nav-link">Kuliner</a></li>
-	          <li class="nav-item"><a href="hotel.html" class="nav-link">Wisata</a></li>
+	          <li class="nav-item"><a href="Daftar_Kuliner" class="nav-link">Kuliner</a></li>
+	          <li class="nav-item"><a href="Daftar_Wisata" class="nav-link">Wisata</a></li>
 	          <li class="nav-item"><a href="blog.html" class="nav-link">Masukan</a></li>
 	          <!-- <li class="nav-item"><a href="admin" class="nav-link">Admin</a></li> -->
             @if (Route::has('login'))

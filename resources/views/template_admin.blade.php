@@ -243,6 +243,7 @@
             <li><a href="/hotel_admin"><i class="fa fa-circle-o"></i> Hotel</a></li>
             <li><a href="/wisata_admin"><i class="fa fa-circle-o"></i> Tempat Wisata</a></li>
             <li><a href="/kuliner_admin"><i class="fa fa-circle-o"></i> Kuliner</a></li>
+            <li><a href="/kategori_admin"><i class="fa fa-circle-o"></i> Kategori</a></li>
             <!-- <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li> -->
           </ul>
         </li>
