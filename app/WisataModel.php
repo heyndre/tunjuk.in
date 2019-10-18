@@ -9,7 +9,7 @@ class WisataModel extends Model
     protected $primaryKey = 'id';
     protected $table = 'wisata';
 
-    public function cat() {
-      return $this->belongsTo('App\CategoryModel');
+    public function category() {
+      return $this->belongsTo('App\CategoryModel', 'category_id');
     }
 }

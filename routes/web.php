@@ -36,6 +36,11 @@ Route::resource('kuliner_admin', 'KulinerController');
 Route::get('Daftar_Kuliner', 'KulinerCatalog@index');
 Route::get('Detail_Kuliner/{id}', 'KulinerCatalog@show');
 
+Route::resource('wisata_admin', 'WisataController');
+
+Route::get('Daftar_Wisata', 'WisataCatalog@index');
+Route::get('Detail_Wisata/{id}', 'WisataCatalog@show');
+
 Route::resource('kategori_admin', 'CategoryController');
 
 Route::get('/migrate', function() {

@@ -1,7 +1,7 @@
 @extends ('template_admin')
 
 @section ('page_title')
-Tambah Hotel
+Tambah Wisata
 @endsection
 
 @section ('page_head')
@@ -28,59 +28,67 @@ Tambah Hotel
   <!-- Default box -->
   <div class="box">
     <div class="box-header with-border">
-      <h3 class="box-title">Kelola Data Hotel</h3>
+      <h3 class="box-title">Kelola Data Wisata</h3>
 
       <div class="box-tools pull-right">
-        <a href="/hotel_admin" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i>Batal</a>
+        <a href="/wisata_admin" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i>Batal</a>
         <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
           <i class="fa fa-times"></i></button> -->
       </div>
     </div>
     <div class="box">
       <div class="box-header">
-        <h3 class="box-title">Tambah Hotel</h3>
+        <h3 class="box-title">Tambah Wisata</h3>
       </div>
 
       <div class="box-body">
-        <form role="form" method="POST" action="/hotel_admin" enctype="multipart/form-data">
+        <form role="form" method="POST" action="/wisata_admin" enctype="multipart/form-data">
           @csrf
           <div class="box-body">
             <div class="form-group">
-              <label for="namaHotel">Nama Hotel</label>
-              <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel">
+              <label for="namaWisata">Nama Wisata</label>
+              <input type="text" class="form-control" name="namaWisata" id="namaWisata" placeholder="Nama Wisata">
             </div>
             <div class="form-group">
-              <label for="exampleInputFile">Gambar Hotel</label>
-              <input type="file" name="gambarHotel" id="gambarHotel">
-              <p class="help-block">Masukkan gambar hotel</p>
+              <label for="exampleInputFile">Gambar Wisata</label>
+              <input type="file" name="gambarWisata" id="gambarWisata">
+              <p class="help-block">Masukkan gambar Wisata</p>
             </div>
             <div class="form-group">
-              <label for="alamatHotel">Alamat</label>
-              <input type="text" class="form-control" name="alamatHotel" accept="" id="alamatHotel" placeholder="Alamat Hotel">
+              <label for="alamatWisata">Alamat</label>
+              <input type="text" class="form-control" name="alamatWisata" accept="" id="alamatWisata" placeholder="Alamat Wisata">
+            </div>
+            <div class="form-group">
+              <label>Kategori</label>
+              <select name="kategoriWisata" id="kategoriWisata" class="form-control">
+                @foreach ($kategori as $key => $kate)
+                <option value="{{$kate->category_id}}">{{$kate->category_name}}</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
               <label>Kecamatan</label>
-              <select name="kecamatanHotel" id="kecamatanHotel" class="form-control">
+              <select name="kecamatanWisata" id="kecamatanWisata" class="form-control">
                 @foreach ($kec as $key => $kcm)
                 <option value="{{$kcm->nama_kecamatan}}">{{$kcm->nama_kecamatan}}</option>
                 @endforeach
               </select>
             </div>
             <div class="form-group">
-              <label for="kodePosHotel">Kode Pos</label>
-              <input type="text" class="form-control" name="kodePosHotel" id="kodePosHotel" placeholder="Kode Pos Hotel">
+              <label for="kodePosWisata">Kode Pos</label>
+              <input type="text" class="form-control" name="kodePosWisata" id="kodePosWisata" placeholder="Kode Pos Wisata">
             </div>
             <div class="form-group">
-              <label for="kotaHotel">Kota</label>
-              <input type="text" class="form-control" name="kotaHotel" id="kotaHotel" placeholder="Jember" value="Jember" disabled>
+              <label for="kotaWisata">Kota</label>
+              <input type="text" class="form-control" name="kotaWisata" id="kotaWisata" placeholder="Jember" value="Jember" disabled>
             </div>
             <div class="form-group">
-              <label for="lintangHotel">Koordinat lintang</label>
-              <input type="text" class="form-control" name="lintangHotel" id="lintangHotel" placeholder="Latitude" >
+              <label for="lintangWisata">Koordinat lintang</label>
+              <input type="text" class="form-control" name="lintangWisata" id="lintangWisata" placeholder="Latitude" >
             </div>
             <div class="form-group">
-              <label for="bujurHotel">Koordinat Bujur</label>
-              <input type="text" class="form-control" name="bujurHotel" id="bujurHotel" placeholder="Longitude"  >
+              <label for="bujurWisata">Koordinat Bujur</label>
+              <input type="text" class="form-control" name="bujurWisata" id="bujurWisata" placeholder="Longitude"  >
             </div>
             <div class="form-group">
               <label for="tarifAtas">Tarif Atas</label>
@@ -92,7 +100,7 @@ Tambah Hotel
             </div>
             <div class="form-group">
               <label>Deskripsi</label>
-              <textarea class="form-control" rows="3" name="deskripsiHotel" id="deskripsiHotel" placeholder="Deskripsi Hotel"></textarea>
+              <textarea class="form-control" rows="3" name="deskripsiWisata" id="deskripsiWisata" placeholder="Deskripsi Wisata"></textarea>
             </div>
           </div>
             <div class="form-group">
@@ -109,19 +117,10 @@ Tambah Hotel
                 </label>
             </div>
           </div>
-
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </form>
-        <!-- <form>
-          <div class="form-group">
-            <label for="exampleInputFile">Gambar Hotel</label>
-            <input type="file" id="exampleInputFile">
-
-            <p class="help-block">Masukkan gambar hotel</p>
-          </div>
-        </form> -->
       </div>
       <!-- /.box-body -->
     </div>
