@@ -42,21 +42,21 @@ Ubah Tempat Wisata
             <label for="exampleInputFile">Gambar Wisata</label>
             <div class="form-group">
                 <img src="{{asset('image/wisata/'.$data->image)}}" height="300px">
-                <input type="file" name="gambarWisata" id="gambarWisata">
+                <input type="file" accept="image/*" name="gambarWisata" id="gambarWisata">
               <p class="help-block">Ubah gambar Wisata</p>
             </div>
           </div>
             <div class="form-group">
               <label for="namaWisata">Nama Wisata</label>
-              <input type="text" class="form-control" name="namaWisata" id="namaWisata" placeholder="Nama Wisata" value="{{ $data->nama}}">
+              <input type="text" class="form-control" name="namaWisata" id="namaWisata" placeholder="Nama Wisata" value="{{ $data->nama}}" required>
             </div>
             <div class="form-group">
               <label for="alamatWisata">Alamat</label>
-              <input type="text" class="form-control" name="alamatWisata" accept=""id="alamatWisata" placeholder="Alamat Wisata" value="{{ $data->alamat}}">
+              <input type="text" class="form-control" name="alamatWisata" accept=""id="alamatWisata" placeholder="Alamat Wisata" value="{{ $data->alamat}}" required>
             </div>
             <div class="form-group">
               <label>Kategori</label>
-              <select name="kategoriWisata" id="kategoriWisata" class="form-control" value="{{ $data->kecamatan}}">
+              <select name="kategoriWisata" id="kategoriWisata" class="form-control" value="{{ $data->kecamatan}}" required>
                 @foreach ($kategori as $key => $kate)
                 @if ($kate->category_id == $data->category_id)
                 <option value="{{$kate->category_id}}" selected>{{$kate->category_name}}</option>
@@ -81,7 +81,7 @@ Ubah Tempat Wisata
             </div>
             <div class="form-group">
               <label for="kodePosWisata">Kode Pos</label>
-              <input type="text" class="form-control" name="kodePosWisata" id="kodePosWisata" placeholder="Kode Pos Wisata" value="{{ $data->kode_pos}}">
+              <input type="text" class="form-control" name="kodePosWisata" id="kodePosWisata" placeholder="Kode Pos Wisata" value="{{ $data->kode_pos}}" required>
             </div>
             <div class="form-group">
               <label for="kotaWisata">Kota</label>
@@ -89,23 +89,23 @@ Ubah Tempat Wisata
             </div>
             <div class="form-group">
               <label for="lintangWisata">Koordinat lintang</label>
-              <input type="text" class="form-control" name="lintangWisata" id="lintangWisata" placeholder="Latitude" value="{{ $data->latitude}}">
+              <input type="text" class="form-control" name="lintangWisata" id="lintangWisata" placeholder="Latitude" value="{{ $data->latitude}}" required>
             </div>
             <div class="form-group">
               <label for="bujurWisata">Koordinat Bujur</label>
-              <input type="text" class="form-control" name="bujurWisata" id="bujurWisata" placeholder="Longitude" value="{{ $data->longitude}}">
+              <input type="text" class="form-control" name="bujurWisata" id="bujurWisata" placeholder="Longitude" value="{{ $data->longitude}}" required>
             </div>
             <div class="form-group">
               <label for="tarifAtas">Tarif Atas</label>
-              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" value="{{ $data->tarif_atas}}">
+              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" value="{{ $data->tarif_atas}}" required>
             </div>
             <div class="form-group">
               <label for="tarifBawah">Tarif Bawah</label>
-              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" value="{{ $data->tarif_bawah}}">
+              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" value="{{ $data->tarif_bawah}}" required>
             </div>
             <div class="form-group">
               <label>Deskripsi</label>
-              <textarea class="form-control" rows="3" name="deskripsiWisata" id="deskripsiWisata" placeholder="Deskripsi Wisata">{{ $data->deskripsi}}</textarea>
+              <textarea class="form-control" rows="3" name="deskripsiWisata" id="deskripsiWisata" placeholder="Deskripsi Wisata" required>{{ $data->deskripsi}}</textarea>
             </div>
           <div class="form-group">
             @if($data->verified=='1')

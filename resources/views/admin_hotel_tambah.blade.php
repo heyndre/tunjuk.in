@@ -47,7 +47,7 @@ Tambah Hotel
           <div class="box-body">
             <div class="form-group">
               <label for="namaHotel">Nama Hotel</label>
-              <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel">
+              <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel" required>
             </div>
             <div class="form-group">
               <label for="exampleInputFile">Gambar Hotel</label>
@@ -56,7 +56,7 @@ Tambah Hotel
             </div>
             <div class="form-group">
               <label for="alamatHotel">Alamat</label>
-              <input type="text" class="form-control" name="alamatHotel" accept="" id="alamatHotel" placeholder="Alamat Hotel">
+              <input type="text" class="form-control" name="alamatHotel" accept="" id="alamatHotel" placeholder="Alamat Hotel" required>
             </div>
             <div class="form-group">
               <label>Kecamatan</label>
@@ -68,7 +68,7 @@ Tambah Hotel
             </div>
             <div class="form-group">
               <label for="kodePosHotel">Kode Pos</label>
-              <input type="text" class="form-control" name="kodePosHotel" id="kodePosHotel" placeholder="Kode Pos Hotel">
+              <input type="text" class="form-control" name="kodePosHotel" id="kodePosHotel" placeholder="Kode Pos Hotel" required>
             </div>
             <div class="form-group">
               <label for="kotaHotel">Kota</label>
@@ -76,23 +76,23 @@ Tambah Hotel
             </div>
             <div class="form-group">
               <label for="lintangHotel">Koordinat lintang</label>
-              <input type="text" class="form-control" name="lintangHotel" id="lintangHotel" placeholder="Latitude" >
+              <input type="text" class="form-control" name="lintangHotel" id="lintangHotel" placeholder="Latitude" required>
             </div>
             <div class="form-group">
               <label for="bujurHotel">Koordinat Bujur</label>
-              <input type="text" class="form-control" name="bujurHotel" id="bujurHotel" placeholder="Longitude"  >
+              <input type="text" class="form-control" name="bujurHotel" id="bujurHotel" placeholder="Longitude" required>
             </div>
             <div class="form-group">
               <label for="tarifAtas">Tarif Atas</label>
-              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" >
+              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" required>
             </div>
             <div class="form-group">
               <label for="tarifBawah">Tarif Bawah</label>
-              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" >
+              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" required>
             </div>
             <div class="form-group">
               <label>Deskripsi</label>
-              <textarea class="form-control" rows="3" name="deskripsiHotel" id="deskripsiHotel" placeholder="Deskripsi Hotel"></textarea>
+              <textarea class="form-control" rows="3" name="deskripsiHotel" id="deskripsiHotel" placeholder="Deskripsi Hotel" required></textarea>
             </div>
           </div>
             <div class="form-group">

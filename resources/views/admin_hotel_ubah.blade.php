@@ -48,11 +48,11 @@ Ubah Hotel
           </div>
             <div class="form-group">
               <label for="namaHotel">Nama Hotel</label>
-              <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel" value="{{ $data->nama}}">
+              <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel" value="{{ $data->nama}}" required>
             </div>
             <div class="form-group">
               <label for="alamatHotel">Alamat</label>
-              <input type="text" class="form-control" name="alamatHotel" accept=""id="alamatHotel" placeholder="Alamat Hotel" value="{{ $data->alamat}}">
+              <input type="text" class="form-control" name="alamatHotel" accept=""id="alamatHotel" placeholder="Alamat Hotel" value="{{ $data->alamat}}" required>
             </div>
             <!-- <div class="form-group">
               <label for="kecamatanHotel">Kecamatan</label>
@@ -60,7 +60,7 @@ Ubah Hotel
             </div> -->
             <div class="form-group">
               <label>Kecamatan</label>
-              <select name="kecamatanHotel" id="kecamatanHotel" class="form-control" value="{{ $data->kecamatan}}">
+              <select name="kecamatanHotel" id="kecamatanHotel" class="form-control" value="{{ $data->kecamatan}}" required>
                 @foreach ($kec as $key => $kcm)
                 @if ($kcm->nama_kecamatan == $data->kecamatan)
                 <option value="{{$kcm->nama_kecamatan}}" selected>{{$kcm->nama_kecamatan}}</option>
@@ -72,7 +72,7 @@ Ubah Hotel
             </div>
             <div class="form-group">
               <label for="kodePosHotel">Kode Pos</label>
-              <input type="text" class="form-control" name="kodePosHotel" id="kodePosHotel" placeholder="Kode Pos Hotel" value="{{ $data->kode_pos}}">
+              <input type="text" class="form-control" name="kodePosHotel" id="kodePosHotel" placeholder="Kode Pos Hotel" value="{{ $data->kode_pos}}" required>
             </div>
             <div class="form-group">
               <label for="kotaHotel">Kota</label>
@@ -80,23 +80,23 @@ Ubah Hotel
             </div>
             <div class="form-group">
               <label for="lintangHotel">Koordinat lintang</label>
-              <input type="text" class="form-control" name="lintangHotel" id="lintangHotel" placeholder="Latitude" value="{{ $data->latitude}}">
+              <input type="text" class="form-control" name="lintangHotel" id="lintangHotel" placeholder="Latitude" value="{{ $data->latitude}}" required>
             </div>
             <div class="form-group">
               <label for="bujurHotel">Koordinat Bujur</label>
-              <input type="text" class="form-control" name="bujurHotel" id="bujurHotel" placeholder="Longitude" value="{{ $data->longitude}}">
+              <input type="text" class="form-control" name="bujurHotel" id="bujurHotel" placeholder="Longitude" value="{{ $data->longitude}}" required>
             </div>
             <div class="form-group">
               <label for="tarifAtas">Tarif Atas</label>
-              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" value="{{ $data->tarif_atas}}">
+              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" value="{{ $data->tarif_atas}}" required>
             </div>
             <div class="form-group">
               <label for="tarifBawah">Tarif Bawah</label>
-              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" value="{{ $data->tarif_bawah}}">
+              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" value="{{ $data->tarif_bawah}}" required>
             </div>
             <div class="form-group">
               <label>Deskripsi</label>
-              <textarea class="form-control" rows="3" name="deskripsiHotel" id="deskripsiHotel" placeholder="Deskripsi Hotel">{{ $data->deskripsi}}</textarea>
+              <textarea class="form-control" rows="3" name="deskripsiHotel" id="deskripsiHotel" placeholder="Deskripsi Hotel" required>{{ $data->deskripsi}}</textarea>
             </div>
           <div class="form-group">
             @if($data->verified=='1')

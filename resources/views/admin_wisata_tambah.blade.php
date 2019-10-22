@@ -47,16 +47,16 @@ Tambah Wisata
           <div class="box-body">
             <div class="form-group">
               <label for="namaWisata">Nama Wisata</label>
-              <input type="text" class="form-control" name="namaWisata" id="namaWisata" placeholder="Nama Wisata">
+              <input type="text" class="form-control" name="namaWisata" id="namaWisata" placeholder="Nama Wisata" required>
             </div>
             <div class="form-group">
               <label for="exampleInputFile">Gambar Wisata</label>
-              <input type="file" name="gambarWisata" id="gambarWisata">
+              <input type="file" accept="image/*" name="gambarWisata" id="gambarWisata">
               <p class="help-block">Masukkan gambar Wisata</p>
             </div>
             <div class="form-group">
               <label for="alamatWisata">Alamat</label>
-              <input type="text" class="form-control" name="alamatWisata" accept="" id="alamatWisata" placeholder="Alamat Wisata">
+              <input type="text" class="form-control" name="alamatWisata" accept="" id="alamatWisata" placeholder="Alamat Wisata" required>
             </div>
             <div class="form-group">
               <label>Kategori</label>
@@ -76,7 +76,7 @@ Tambah Wisata
             </div>
             <div class="form-group">
               <label for="kodePosWisata">Kode Pos</label>
-              <input type="text" class="form-control" name="kodePosWisata" id="kodePosWisata" placeholder="Kode Pos Wisata">
+              <input type="text" class="form-control" name="kodePosWisata" id="kodePosWisata" placeholder="Kode Pos Wisata" required>
             </div>
             <div class="form-group">
               <label for="kotaWisata">Kota</label>
@@ -84,23 +84,23 @@ Tambah Wisata
             </div>
             <div class="form-group">
               <label for="lintangWisata">Koordinat lintang</label>
-              <input type="text" class="form-control" name="lintangWisata" id="lintangWisata" placeholder="Latitude" >
+              <input type="text" class="form-control" name="lintangWisata" id="lintangWisata" placeholder="Latitude" required>
             </div>
             <div class="form-group">
               <label for="bujurWisata">Koordinat Bujur</label>
-              <input type="text" class="form-control" name="bujurWisata" id="bujurWisata" placeholder="Longitude"  >
+              <input type="text" class="form-control" name="bujurWisata" id="bujurWisata" placeholder="Longitude"  required>
             </div>
             <div class="form-group">
               <label for="tarifAtas">Tarif Atas</label>
-              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" >
+              <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" required>
             </div>
             <div class="form-group">
               <label for="tarifBawah">Tarif Bawah</label>
-              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" >
+              <input type="text" class="form-control" name="tarifBawah" id="tarifBawah" placeholder="Tarif Bawah" required>
             </div>
             <div class="form-group">
               <label>Deskripsi</label>
-              <textarea class="form-control" rows="3" name="deskripsiWisata" id="deskripsiWisata" placeholder="Deskripsi Wisata"></textarea>
+              <textarea class="form-control" rows="3" name="deskripsiWisata" id="deskripsiWisata" placeholder="Deskripsi Wisata" required></textarea>
             </div>
           </div>
             <div class="form-group">

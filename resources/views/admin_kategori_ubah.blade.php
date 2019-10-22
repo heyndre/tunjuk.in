@@ -40,7 +40,7 @@ Ubah Kategori
           @csrf
             <div class="form-group">
               <label for="namaHotel">Nama Kategori</label>
-              <input type="text" class="form-control" name="namaKategori" id="namaKategori" placeholder="Nama Kategori" value="{{ $data->category_name}}">
+              <input type="text" class="form-control" name="namaKategori" id="namaKategori" placeholder="Nama Kategori" value="{{ $data->category_name}}" required>
             </div>
 
           <div class="box-footer">

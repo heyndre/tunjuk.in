@@ -46,21 +46,13 @@ Tambah Hotel
           @csrf
           <div class="box-body">
             <div class="form-group">
-              <label for="namaKategori">Nama Kategori</label>
-              <input type="text" class="form-control" name="namaKategori" id="namaKategori" placeholder="Nama Kategori">
+              <label for="namaKategori">Nama Kategori </label>
+              <input type="text" class="form-control" name="namaKategori" id="namaKategori" placeholder="Nama Kategori" required>
             </div>
           <div class="box-footer">
             <button type="submit" class="btn btn-primary">Simpan</button>
           </div>
         </form>
-        <!-- <form>
-          <div class="form-group">
-            <label for="exampleInputFile">Gambar Hotel</label>
-            <input type="file" id="exampleInputFile">
-
-            <p class="help-block">Masukkan gambar hotel</p>
-          </div>
-        </form> -->
       </div>
       <!-- /.box-body -->
     </div>
