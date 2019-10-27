@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\HotelModel;
+use App\HotelComment;
 
 class HotelCatalog extends Controller
 {
@@ -16,7 +17,8 @@ class HotelCatalog extends Controller
 
   public function show ($id) {
     $hotels = HotelModel::findOrFail($id);
-    return view('HotelDetail', ['data' => $hotels]);
+    $comment = HotelComment::where('hotel_id', $id)->get();
+    return view('HotelDetail', ['data' => $hotels, 'comments' => $comment]);
   }
 
 }

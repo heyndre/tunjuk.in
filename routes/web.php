@@ -26,7 +26,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('hotel_admin', 'HotelController');
 
 Route::get('Daftar_Hotel', 'HotelCatalog@index');
-Route::get('Detail_Hotel/{id}', 'HotelCatalog@show');
+Route::get('Detail_Hotel/{id}', 'HotelCatalog@show')->name('Hotel.show');
 
 Route::get('/upload', 'UploadController@upload');
 Route::post('/upload/proses', 'UploadController@proses_upload');
@@ -42,6 +42,8 @@ Route::get('Daftar_Wisata', 'WisataCatalog@index');
 Route::get('Detail_Wisata/{id}', 'WisataCatalog@show');
 
 Route::resource('kategori_admin', 'CategoryController');
+
+Route::post('CommentHotel/{hotel_id}', ['uses' => 'CommentHotels@store', 'as' => 'CommentHotel.store']);
 
 Route::get('/migrate', function() {
     $exitCode = Artisan::call('migrate --seed');
