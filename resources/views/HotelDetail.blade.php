@@ -48,7 +48,7 @@ Detail Hotel
         <i class="icon-star"></i>
         <i class="icon-star"></i>
         <i class="icon-star-o"></i>
-        8 Rating</span>
+        8 Rating, direview oleh {{$jumlah}} pengguna</span>
       </p>
       <p>Deskripsi Hotel </p>
       <p>{{$data->deskripsi}}</p>
@@ -73,7 +73,7 @@ Detail Hotel
     </div>
 
     <div class="col-lg-12">
-      <h3 class="mb-5">Review pengunjung</h3>
+      <h3 class="mb-5">Review pengunjung - {{ $jumlah}} total</h3>
       <div class="row">
         @foreach($comments as $key => $value)
 

@@ -18,7 +18,8 @@ class HotelCatalog extends Controller
   public function show ($id) {
     $hotels = HotelModel::findOrFail($id);
     $comment = HotelComment::where('hotel_id', $id)->get();
-    return view('HotelDetail', ['data' => $hotels, 'comments' => $comment]);
+    $count = HotelComment::where('hotel_id', $id)->count();
+    return view('HotelDetail', ['data' => $hotels, 'comments' => $comment, 'jumlah' => $count]);
   }
 
 }
