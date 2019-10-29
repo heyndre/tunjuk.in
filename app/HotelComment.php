@@ -10,7 +10,7 @@ class HotelComment extends Model
   protected $primaryKey = 'id';
 
   public function hotel() {
-    return $this->belongsTo('App/HotelModel');
+    return $this->belongsTo('App\HotelModel');
   }
 
   public function users() {

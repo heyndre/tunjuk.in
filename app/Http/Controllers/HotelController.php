@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\HotelModel;
 use App\KecamatanModel;
+use App\HotelComment;
 use Image;
 
 class HotelController extends Controller
@@ -18,10 +19,11 @@ class HotelController extends Controller
     public function index()
     {
       $hotels = HotelModel::all();
+      $comment = HotelComment::all();
       // echo "<pre>";
       // var_dump($hotels);
       return view ('admin_hotel_list', [
-        'data' => $hotels
+        'data' => $hotels, 'comm' => $comment
       ]);
 
     }

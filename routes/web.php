@@ -45,6 +45,10 @@ Route::resource('kategori_admin', 'CategoryController');
 
 Route::post('CommentHotel/{hotel_id}', ['uses' => 'CommentHotels@store', 'as' => 'CommentHotel.store']);
 
+Route::resource('ulasan_hotel', 'UlasanHotel');
+Route::resource('ulasan_wisata', 'UlasanWisata');
+Route::resource('ulasan_kuliner', 'UlasanKuliner');
+
 Route::get('/migrate', function() {
     $exitCode = Artisan::call('migrate --seed');
     return 'DONE'; //Return anything

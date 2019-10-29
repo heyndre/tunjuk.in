@@ -50,6 +50,7 @@ Daftar Hotel
             <th>Koordinat</th>
             <th>Tarif atas</th>
             <th>Tarif bawah</th>
+            <!-- <th>Jumlah Ulasan</th> -->
             <!-- <th>Jam Buka</th>
             <th>Jam Tutup</th> -->
             <th>Verifikasi</th>
@@ -61,7 +62,12 @@ Daftar Hotel
             @foreach ($data as $key => $value)
             <tr>
               <th>{{++$number}}</th>
-              <th><img src="{{asset('image/hotel/'.$value->image)}}" height="50px"></th>
+              <th>
+                <a href="{{ route('Hotel.show', ['Hotel' => $value->id])}}">
+                <img src="{{asset('image/hotel/'.$value->image)}}" height="50px">
+                <br>
+                Lihat Detail</a>
+              </th>
               <th>{{$value->nama}}</th>
               <th>{{$value->alamat}}</th>
               <th>{{$value->kecamatan}}</th>
@@ -78,6 +84,8 @@ Daftar Hotel
               </th>
               <th>
                 <a href="{{ route('hotel_admin.edit', ['hotel_admin' => $value->id])}}">Ubah / Hapus</a>
+                <br>
+                <!-- <a href="{{ route('Hotel.show', ['Hotel' => $value->id])}}">Lihat Detail</a> -->
                 <!-- <br> -->
                 <!-- <a href="#" onclick="event.preventDefault(); if(confirm('Konfirmasi Penghapusan Data')) {$('form#hapus').attr('action', '{{ route('hotel_admin.destroy', ['hotel_admin' => $value->id])}}').submit(); location.reload();}">Hapus</a> -->
               </th>
@@ -95,6 +103,7 @@ Daftar Hotel
               <th>Koordinat</th>
               <th>Tarif atas</th>
               <th>Tarif bawah</th>
+              <!-- <th>Jumlah Ulasan</th> -->
               <th>Verifikasi</th>
               <th>Opsi</th>
             </tr>

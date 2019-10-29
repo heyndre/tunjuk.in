@@ -42,13 +42,13 @@ Detail Hotel
       <p class="rate mb-6">
         <span class="loc"><a href="#"><i class="icon-map"></i> {{$data->alamat}}, {{$data->kota}}</a></span>
         <br>
-        <span class="star">
+        <!-- <span class="star">
         <i class="icon-star"></i>
         <i class="icon-star"></i>
         <i class="icon-star"></i>
         <i class="icon-star"></i>
         <i class="icon-star-o"></i>
-        8 Rating, direview oleh {{$jumlah}} pengguna</span>
+        8 Rating, direview oleh {{$jumlah}} pengguna</span> -->
       </p>
       <p>Deskripsi Hotel </p>
       <p>{{$data->deskripsi}}</p>
@@ -66,6 +66,15 @@ Detail Hotel
           <li>{{$data->tarif_bawah}}</li>
         </ul>
       </div>
+      @if (Route::has('login'))
+        @auth
+          @if(Auth::user()->privileged=='1')
+            <div class="btn py-3 px-4 btn-primary">
+            <a href="{{ route('hotel_admin.edit', ['hotel_admin' => $data->id])}}" style="color:#FFF">Ubah Data</a>
+            </div>
+          @endif
+        @endauth
+      @endif
     </div>
 
     <div class="col-md-6 hotel-single mt-6 mb-6 ftco-animate">
@@ -73,28 +82,56 @@ Detail Hotel
     </div>
 
     <div class="col-lg-12">
-      <h3 class="mb-5">Review pengunjung - {{ $jumlah}} total</h3>
+      <h3 class="mb-5">Ulasan pengunjung - {{ $jumlah}}</h3>
       <div class="row">
         @foreach($comments as $key => $value)
-
-      <div class="col-md-6 mt-6 mb-6">
-        <div class="">
-        <ul class="comment-list">
-          <li class="comment">
-            <div class="vcard bio">
-              <img src="images/person_1.jpg" alt="Image placeholder">
+          <div class="col-md-6 mt-6 mb-6">
+            <div class="">
+            <ul class="comment-list">
+              <li class="comment">
+                <div class="vcard bio">
+                  <img src="images/person_1.jpg" alt="Image placeholder">
+                </div>
+                <div class="comment-body">
+                  <h3>{{$value->users['name']}}</h3>
+                    <div class="meta"><span>Waktu kunjung : {{$value->tanggal_visitasi}}</span></div>
+                      <p>{{$value->judul}}</p>
+                      <p>{{$value->detail}}</p>
+                      @if (Route::has('login'))
+                        @auth
+                          @if(Auth::user()->privileged=='1')
+                          <div class="row">
+                            <div>
+                              <a href="{{ route('ulasan_hotel.edit', ['ulasan_hotel' => $value->id])}}" class="btn btn-primary">Ubah</span></a>
+                            </div>
+                            <div>
+                              <form id="hapus" method="post" action="{{ route('ulasan_hotel.destroy', ['ulasan_hotel' => $value->id])}}" style="">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger" onclick="clicked(event)"> Hapus </button>
+                              </form>
+                            </div>
+                          </div>
+                            <!-- <a href="{{ route('ulasan_hotel.destroy', ['ulasan_hotel' => $value->id])}}" class="btn btn-danger">Hapus</span></a> -->
+                          @elseif(Auth::user()->id == $value->user_id)
+                          <div class="row">
+                            <!-- <a href="" class="btn btn-danger">Hapus</span></a> -->
+                            <form id="hapus" method="post" action="{{ route('ulasan_hotel.destroy', ['ulasan_hotel' => $value->id])}}" style="">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger" onclick="clicked(event)"> Hapus </button>
+                            </form>
+                          </div>
+                          @else
+                          @endif
+                        @endauth
+                      @endif
+                </div>
+              </li>
+            </ul>
             </div>
-            <div class="comment-body">
-              <h3>{{$value->users['name']}}</h3>
-                <div class="meta"><span>Waktu kunjung : {{$value->tanggal_visitasi}}</span></div>
-                  <p>{{$value->judul}}</p>
-                  <p>{{$value->detail}}</p>
-            </div>
-          </li>
-        </ul>
-        </div>
-      </div>
-      @endforeach
+          </div>
+        @endforeach
 
     </div>
   </div>
@@ -102,4 +139,11 @@ Detail Hotel
 </div>
 
   </section>
+
+  <script>
+  function clicked(e)
+  {
+      if(!confirm('Hapus Komentar?'))e.preventDefault();
+  }
+  </script>
 @endsection

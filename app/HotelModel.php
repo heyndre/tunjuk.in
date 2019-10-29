@@ -10,6 +10,6 @@ class HotelModel extends Model
     protected $primaryKey = 'id';
 
     public function comments() {
-      return $this->hasMany('App/HotelComment');
+      return $this->hasMany('App\HotelComment');
     }
 }
