@@ -266,9 +266,9 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="ulasan_admin"><i class="fa fa-circle-o"></i>Ulasan Hotel</a></li>
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i>Ulasan Wisata</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i>Ulasan Kuliner</a></li>
+            <li><a href="/ulasan_hotel"><i class="fa fa-circle-o"></i>Ulasan Hotel</a></li>
+            <li><a href="/ulasan_wisata"><i class="fa fa-circle-o"></i>Ulasan Wisata</a></li>
+            <li><a href="/ulasan_kuliner"><i class="fa fa-circle-o"></i>Ulasan Kuliner</a></li>
           </ul>
         </li>
         <!--Masukan Pengguna-->

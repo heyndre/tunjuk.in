@@ -34,12 +34,12 @@ Route::post('/upload/proses', 'UploadController@proses_upload');
 Route::resource('kuliner_admin', 'KulinerController');
 
 Route::get('Daftar_Kuliner', 'KulinerCatalog@index');
-Route::get('Detail_Kuliner/{id}', 'KulinerCatalog@show');
+Route::get('Detail_Kuliner/{id}', 'KulinerCatalog@show')->name('Kuliner.show');
 
 Route::resource('wisata_admin', 'WisataController');
 
 Route::get('Daftar_Wisata', 'WisataCatalog@index');
-Route::get('Detail_Wisata/{id}', 'WisataCatalog@show');
+Route::get('Detail_Wisata/{id}', 'WisataCatalog@show')->name('Wisata.show');
 
 Route::resource('kategori_admin', 'CategoryController');
 

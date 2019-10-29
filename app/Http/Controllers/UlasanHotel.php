@@ -16,7 +16,8 @@ class UlasanHotel extends Controller
      */
     public function index()
     {
-        //
+        $hotel = HotelModel::all();
+        return view('Rhotel.hotel', ['data' => $hotel]);
     }
 
     /**
@@ -74,7 +75,16 @@ class UlasanHotel extends Controller
      */
     public function show($id)
     {
-        //
+      // $verified = ['hotel_id' => $id, 'approved' => '1'];
+      // $denied = ['hotel_id' => $id, 'approved' => '0'];
+      $hotel = HotelModel::findOrFail($id);
+      $comment = HotelComment::where('hotel_id', $id)
+      ->whereColumn('created_at', 'updated_at')->get();
+      $agreed = HotelComment::where('hotel_id', $id)
+      ->where('approved', '1')->get();
+      $rejected = HotelComment::where('hotel_id', $id)
+      ->where('approved', '0')->get();
+      return view('RHotel.list', ['hotel' => $hotel, 'setuju' => $agreed, 'tolak' => $rejected, 'proses' => $comment]);
     }
 
     /**
@@ -87,7 +97,7 @@ class UlasanHotel extends Controller
     {
         $comment = HotelComment::findOrFail($id);
         $hotel = HotelModel::findOrFail($comment->hotel_id)->get();
-        return view('UlasanAdmin.hotel', ['data' => $comment, 'hotel' => $hotel]);
+        return view('RHotel.hotel', ['data' => $comment, 'hotel' => $hotel]);
     }
 
     /**
@@ -101,13 +111,15 @@ class UlasanHotel extends Controller
     {
         $comment = HotelComment::findOrFail($id);
         $comment->approved = $request->input('verify');
+        $comment->updated_at = now();
         try {
           $comment->save();
         } catch (Exception $e) {
           report($e);
           return false;
         }
-        return redirect()->route('Hotel.show', [$comment->id]);
+
+        return redirect()->back()->with(['success' => 'Berhasil disetujui']);
     }
 
     /**
@@ -121,6 +133,19 @@ class UlasanHotel extends Controller
         $comment = HotelComment::findOrFail($id);
         $hotel_id = $comment->hotel_id;
         $comment->delete();
-        return redirect()->route('Hotel.show', [$hotel_id]);
+        return redirect()->back()->with(['success' => 'Berhasil dihapus']);
+    }
+
+    public function quickAgree(Request $request, $id)
+    {
+      $comment = HotelComment::findOrFail($id);
+      $comment->approved = '1';
+      try {
+        $comment->save();
+      } catch (Exception $e) {
+        report($e);
+        return false;
+      }
+      return redirect()->route('ulasan_hotel.show', [$comment->hotel_id]);
     }
 }
