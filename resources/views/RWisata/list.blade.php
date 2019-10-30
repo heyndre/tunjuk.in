@@ -72,7 +72,6 @@ Lihat Ulasan Kuliner
                              <th>{{$value->judul}}</th>
                              <th>{{$value->detail}}</th>
                              <th>
-                               <!-- <a href="">Setuju</a> -->
                                <form id="setuju" method="post" action="{{ route('ulasan_kuliner.update', ['ulasan_kuliner' => $value->id])}}">
                                  @csrf
                                  @method('PUT')
@@ -82,7 +81,12 @@ Lihat Ulasan Kuliner
                                <br>
                              </th>
                              <th>
-                               Abaikan
+                               <form id="setuju" method="post" action="{{ route('ulasan_kuliner.update', ['ulasan_kuliner' => $value->id])}}">
+                                 @csrf
+                                 @method('PUT')
+                                 <input type="hidden" name="verify" value="0">
+                                 <button type="submit" class="btn btn-warning"> Abaikan </button>
+                               </form>
                                <br>
                                <div>
                                  <form id="hapus" method="post" action="{{ route('ulasan_kuliner.destroy', ['ulasan_kuliner' => $value->id])}}" style="">
@@ -141,7 +145,6 @@ Lihat Ulasan Kuliner
                                 <th>Nama Tempat Kuliner</th>
                                 <th>Judul</th>
                                 <th>Ulasan</th>
-                                <th>Verifikasi</th>
                                 <th>Opsi</th>
                               </tr>
                               </thead>
@@ -157,11 +160,12 @@ Lihat Ulasan Kuliner
                                   <th>{{$lolos->judul}}</th>
                                   <th>{{$lolos->detail}}</th>
                                   <th>
-                                    <a href="{{ route('ulasan_kuliner.edit', ['ulasan_kuliner' => $lolos->id])}}">Setuju</a>
-                                    <br>
-                                  </th>
-                                  <th>
-                                    Abaikan
+                                    <form id="setuju" method="post" action="{{ route('ulasan_kuliner.update', ['ulasan_kuliner' => $value->id])}}">
+                                      @csrf
+                                      @method('PUT')
+                                      <input type="hidden" name="verify" value="0">
+                                      <button type="submit" class="btn btn-warning"> Abaikan </button>
+                                    </form>
                                     <br>
                                     <div>
                                       <form id="hapus" method="post" action="{{ route('ulasan_kuliner.destroy', ['ulasan_kuliner' => $lolos->id])}}" style="">
@@ -182,7 +186,6 @@ Lihat Ulasan Kuliner
                                   <th>Nama Tempat Kuliner</th>
                                   <th>Judul</th>
                                   <th>Ulasan</th>
-                                  <th>Verifikasi</th>
                                   <th>Opsi</th>
                                 </tr>
                               </tfoot>
@@ -236,12 +239,15 @@ Lihat Ulasan Kuliner
                                <th>{{$lolos->judul}}</th>
                                <th>{{$lolos->detail}}</th>
                                <th>
-                                 <a href="{{ route('ulasan_kuliner.edit', ['ulasan_kuliner' => $lolos->id])}}">Setuju</a>
+                                 <form id="setuju" method="post" action="{{ route('ulasan_kuliner.update', ['ulasan_kuliner' => $value->id])}}">
+                                   @csrf
+                                   @method('PUT')
+                                   <input type="hidden" name="verify" value="1">
+                                   <button type="submit" class="btn btn-info"> Setuju </button>
+                                 </form>
                                  <br>
                                </th>
                                <th>
-                                 Abaikan
-                                 <br>
                                  <div>
                                    <form id="hapus" method="post" action="{{ route('ulasan_kuliner.destroy', ['ulasan_kuliner' => $lolos->id])}}" style="">
                                      @csrf
