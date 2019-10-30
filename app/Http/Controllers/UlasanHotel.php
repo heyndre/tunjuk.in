@@ -17,7 +17,7 @@ class UlasanHotel extends Controller
     public function index()
     {
         $hotel = HotelModel::all();
-        return view('Rhotel.hotel', ['data' => $hotel]);
+        return view('RHotel.hotel', ['data' => $hotel]);
     }
 
     /**
