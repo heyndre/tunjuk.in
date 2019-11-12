@@ -52,6 +52,7 @@ class HotelController extends Controller
         $this->validate($request, array(
           'namaHotel' => 'required',
           'alamatHotel' => 'required',
+          'ratingHotel' => 'required',
           'kecamatanHotel' => 'required',
           'kodePosHotel' => 'required',
           'lintangHotel' => 'required',
@@ -64,6 +65,7 @@ class HotelController extends Controller
 
         $hotel = new HotelModel();
         $hotel->nama = $request->input('namaHotel');
+        $hotel->rating = $request->input('ratingHotel');
         $hotel->alamat = $request->input('alamatHotel');
         $hotel->kecamatan = $request->input('kecamatanHotel');
         $hotel->kode_pos = $request->input('kodePosHotel');
@@ -132,6 +134,7 @@ class HotelController extends Controller
     {
       $hotel = HotelModel::findOrFail($id);
       $hotel->nama = $request->input('namaHotel');
+      $hotel->rating = $request->input('ratingHotel');
       $hotel->alamat = $request->input('alamatHotel');
       $hotel->kecamatan = $request->input('kecamatanHotel');
       $hotel->kode_pos = $request->input('kodePosHotel');

@@ -40,6 +40,12 @@ Detail Hotel
       <span>Anda melihat detail </span>
       <h2>Hotel {{$data->nama}}</h2>
       <p class="rate mb-6">
+          @for ($i=1; $i <= $data->rating; $i++)
+          <i class="icon-star"></i>
+          @endfor
+          @for ($o = $i; $o <= 5; $o++)
+          <i class="icon-star-o"></i>
+          @endfor
         <span class="loc"><a href="#"><i class="icon-map"></i> {{$data->alamat}}, {{$data->kota}}</a></span>
         <br>
         <!-- <span class="star">

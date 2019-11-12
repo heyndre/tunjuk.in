@@ -13,6 +13,18 @@
           <label for="email">Bagaimana pengalaman anda?</label>
           <input type="text" class="form-control" name="ulasan_singkat" id="ulasan_singkat" required>
         </div>
+        {{-- <div class="form-group">
+          <div class="range-slider">
+            <div class="form-group">
+              <p>0 tidak puas</p>
+              <input class="slider" id="myRange" value="3" min="0" max="5" step="1" type="range" style="width:50%"/>
+              <p>5 sangat puas</p>
+            </div>
+            <div class="form-group">
+              <p>Rating :<span id="demo"></span>/10</p>
+            </div>
+          </div>
+        </div> --}}
         <div class="form-group">
           <label>Jelaskan lebih lanjut</label>
           <textarea name="review" id="review" rows="5" class="form-control" required></textarea>
@@ -24,6 +36,15 @@
         <input type="hidden" name="hotel_id" value="{{$data->id}}">
       </form>
     </div>
+    {{-- <script>
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value;
+  
+      slider.oninput = function() {
+        output.innerHTML = this.value;
+      }
+    </script> --}}
   @elseif(Auth::user()->privileged=='1')
   <h2>Kelola data ulasan hotel<br>dapat dilakukan pada bagian bawah halaman</h2>
   @endif

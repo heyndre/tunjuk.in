@@ -43,6 +43,7 @@ Daftar Hotel
             <th>Nomor</th>
             <th>Tampilan</th>
             <th>Nama Hotel</th>
+            <th>Rating Hotel</th>
             <th>Alamat</th>
             <th>Kecamatan</th>
             <th>Kode Pos</th>
@@ -69,6 +70,14 @@ Daftar Hotel
                 Lihat Detail</a>
               </th>
               <th>{{$value->nama}}</th>
+              <th>
+                @for ($i = 1; $i <= $value->rating; $i++)
+                <i class="fa fa-star"></i>
+                @endfor
+                @for ($o = $i; $o <= 5; $o++)
+                <i class="fa fa-star-o"></i>
+                @endfor
+              </th>
               <th>{{$value->alamat}}</th>
               <th>{{$value->kecamatan}}</th>
               <th>{{$value->kode_pos}}</th>
@@ -96,6 +105,7 @@ Daftar Hotel
               <th>Nomor</th>
               <th>Tampilan</th>
               <th>Nama Hotel</th>
+              <th>Rating Hotel</th>
               <th>Alamat</th>
               <th>Kecamatan</th>
               <th>Kode Pos</th>

@@ -51,6 +51,18 @@ Ubah Hotel
               <input type="text" class="form-control" name="namaHotel" id="namaHotel" placeholder="Nama Hotel" value="{{ $data->nama}}" required>
             </div>
             <div class="form-group">
+                <label>Rating Hotel</label>
+                <select name="ratingHotel" id="ratingHotel" class="form-control">
+                    @for ($i = 1; $i <= 5; $i++)
+                      @if ($i == $data->rating)
+                      <option value="{{ $i }}" selected>{{ $i }} / 5</option>   
+                      @else 
+                      <option value="{{ $i }}">{{ $i }} / 5</option>
+                      @endif
+                    @endfor
+                </select>
+              </div>
+            <div class="form-group">
               <label for="alamatHotel">Alamat</label>
               <input type="text" class="form-control" name="alamatHotel" accept=""id="alamatHotel" placeholder="Alamat Hotel" value="{{ $data->alamat}}" required>
             </div>
