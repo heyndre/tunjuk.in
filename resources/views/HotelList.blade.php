@@ -24,7 +24,7 @@ Daftar Hotel
         @foreach ($data as $key => $value)
         <div class="col-sm col-md-6 col-lg-4 ftco-animate">
             <div class="destination">
-                <a href="/Detail_Hotel/{{$value->id}}"
+                <a href="{{route('Detail_Hotel', ['Detail_Hotel' => $value->id])}}"
                     class="img img-2 d-flex justify-content-center align-items-center"
                     style="background-image: url({{asset('image/hotel/'.$value->image)}})">
                     <div class="icon d-flex justify-content-center align-items-center">

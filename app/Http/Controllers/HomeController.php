@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -14,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        
     }
 
     /**
@@ -24,20 +25,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-      $nama = Auth::user()->name;
-      $priv = Auth::user()->privileged;
-      if ($priv=='1') {
-        return view('dashboard');
-      }  elseif ($priv=='0') {
-        return view('index');
+      $kat = DB::table('category')->get();
+      if (Auth::check()) {
+        $priv = Auth::user()->privileged;
+        if ($priv=='1') {
+          return view('dashboard');
+        }  elseif ($priv=='0') {
+          return view('index', ['kat' => $kat]);
+        }
+      } else {
+        return view('index', ['kat' => $kat]);
       }
     }
-    public function indexAdmin()
-    {
-      return redirect('dashboard');
-    }
-    public function indexPublic()
-    {
-      return redirect('index');
-    }
+
 }

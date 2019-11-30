@@ -63,7 +63,7 @@ Daftar Wisata
             <tr>
               <th>{{++$number}}</th>
               <th>
-                  <a href="{{ route('Wisata.show', ['Wisata' => $value->id])}}">
+                  <a href="{{ route('Detail_Wisata', ['Detail_Wisata' => $value->id])}}">
                       <img src="{{asset('image/wisata/'.$value->image)}}" height="50px">                      <br>
                       Lihat Detail
                     </a>

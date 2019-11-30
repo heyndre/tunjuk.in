@@ -21,7 +21,7 @@ Beranda
 <section class="ftco-section justify-content-end ftco-search">
   <div class="container-wrap ml-auto">
     <div class="row no-gutters">
-      <div class="col-md-12 nav-link-wrap">
+      {{-- <div class="col-md-12 nav-link-wrap">
         <div class="nav nav-pills justify-content-center text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
           <a class="nav-link active" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Pantai</a>
 
@@ -34,31 +34,34 @@ Beranda
           <a class="nav-link" id="v-pills-5-tab" data-toggle="pill" href="#v-pills-5" role="tab" aria-controls="v-pills-5" aria-selected="false">Bangunan Unik</a>
 
         </div>
-      </div>
+      </div> --}}
       <div class="col-md-12 tab-wrap">
 
         <div class="tab-content p-4 px-5" id="v-pills-tabContent">
 
           <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-            <form action="#" class="search-destination">
+          <form action="{{route('rekomendasi.store')}}" class="search-destination" method="POST">
+              @csrf
+              {{-- <input type="hidden" name="type" value="pantai"> --}}
               <div class="row">
                 <div class="col-md align-items-end">
                   <div class="form-group">
-                    <label for="#">Tanggal mulai</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkin_date" placeholder="Mulai">
+                      <label for="#">Jenis Wisata</label>
+                      <div class="form-field">
+                          <select name="type" id="" class="form-control">
+                            @foreach ($kat as $kat)
+                          <option value="{{$kat->category_id}}">{{$kat->category_name}}</option>
+                            @endforeach
+                            </select>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Tanggal selesai</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkout_date" placeholder="Selesai">
-                    </div>
-                  </div>
+                    <div class="form-group">
+                        <label for="#">Tanggal mulai</label>
+                        <div class="form-field">
+                          <div class="icon"><span class="icon-map-marker"></span></div>
+                          <input type="text" class="form-control checkin_date" placeholder="Mulai" name="checkIn">
+                        </div>
+                      </div>
                 </div>
                 <div class="col-md align-items-end">
                   <div class="form-group">
@@ -66,7 +69,7 @@ Beranda
                     <div class="form-field">
                       <div class="select-wrap">
                         <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
+                        <select name="person" id="" class="form-control">
                           <option value="1">1</option>
                           <option value="2">2</option>
                           <option value="3">3</option>
@@ -76,113 +79,33 @@ Beranda
                       </div>
                     </div>
                   </div>
+                  <div class="form-group">
+                      <label for="#">Tanggal selesai</label>
+                      <div class="form-field">
+                        <div class="icon"><span class="icon-map-marker"></span></div>
+                        <input type="text" class="form-control checkout_date" placeholder="Selesai" name="checkOut">
+                      </div>
+                    </div>
                 </div>
                 <div class="col-md align-items-end">
                   <div class="form-group">
                     <label for="#">Biaya yang disiapkan</label>
                     <div class="slidecontainer">
-                        <input type="range" min="100000" max="1000000" value="250000" class="slider" name="biaya" id="myRange" step="50000">
-                        <p>Biaya: Rp.<span id="demo"></span></p>
+                        {{-- <input type="range" min="100000" max="1000000" value="250000" class="slider" name="biaya" id="myRange" step="50000">
+                        <p>Biaya: Rp.<span id="demo"></span></p> --}}
+                        <p>Biaya Wisata - Wajib Diisi</p>
+                        <input type="number" placeholder="Biaya Wisata" name="biayaWisata" min="1" value="0" required>
+                        <p>Biaya Hotel - 0 untuk mengabaikan hotel</p>
+                        <input type="number" placeholder="Biaya Hotel" name="biayaHotel" min="0" value="0">
+                        <p>Biaya Kuliner - 0 untuk mengabaikan kuliner</p>
+                        <input type="number" placeholder="Biaya Kuliner" name="biayaKuliner" min="0" value="0">
                     </div>
                   </div>
-                </div>
-                <div class="col-md align-self-end">
                   <div class="form-group">
-                    <div class="form-field">
-                      <input type="submit" value="Search" class="form-control btn btn-primary">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-            <form action="#" class="search-destination">
-              <div class="row">
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Check In</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkin_date" placeholder="Check In">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Check Out</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkout_date" placeholder="From">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Guest</label>
-                    <div class="form-field">
-                      <div class="select-wrap">
-                        <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-                        <select name="" id="" class="form-control">
-                          <option value="">1</option>
-                          <option value="">2</option>
-                          <option value="">3</option>
-                          <option value="">4</option>
-                          <option value="">5</option>
-                        </select>
+                      <div class="form-field">
+                        <input type="submit" value="Search" class="form-control btn btn-primary">
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div class="col-md align-self-end">
-                  <div class="form-group">
-                    <div class="form-field">
-                      <input type="submit" value="Search" class="form-control btn btn-primary">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-
-          <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-effect-tab">
-            <form action="#" class="search-destination">
-              <div class="row">
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Where</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control" placeholder="Where">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Check In</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkin_date" placeholder="Check In">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md align-items-end">
-                  <div class="form-group">
-                    <label for="#">Check Out</label>
-                    <div class="form-field">
-                      <div class="icon"><span class="icon-map-marker"></span></div>
-                      <input type="text" class="form-control checkout_date" placeholder="From">
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md align-self-end">
-                  <div class="form-group">
-                    <div class="form-field">
-                      <input type="submit" value="Search" class="form-control btn btn-primary">
-                    </div>
-                  </div>
-                </div>
               </div>
             </form>
           </div>

@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('index');
+
+
+Route::get('/', 'HomeController@index');
+Route::get('landing', 'HomeController@index')->name('landing');
 
 Route::get('welcome', function () {
   return view('welcome');
@@ -21,7 +22,7 @@ Route::get('welcome', function () {
 
 Auth::routes();
 
-Route::get('home', 'HomeController@index')->name('home');
+// Route::get('home', 'HomeController@index')->name('home');
 
 Route::resource('hotel_admin', 'HotelController');
 
@@ -58,3 +59,7 @@ Route::get('migrate-reset', function() {
     $exitCode = Artisan::call('migrate-reset --seed');
     return 'DONE'; //Return anything
 });
+
+Route::resource('rekomendasi', 'RekomendasiController');
+
+Route::get('test', 'RekomendasiController@index')->name('test');

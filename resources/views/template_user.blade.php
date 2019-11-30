@@ -63,7 +63,7 @@
 
 	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
 	    <div class="container">
-	      <a class="navbar-brand" href="{{route('index')}}">Tunjuk.in</a>
+	      <a class="navbar-brand" href="{{route('landing')}}">Tunjuk.in</a>
 	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="oi oi-menu"></span> Menu
 	      </button>
@@ -72,7 +72,7 @@
         </form>
 	      <div class="collapse navbar-collapse" id="ftco-nav">
 	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href="/" class="nav-link">Beranda - Rekomendasi</a></li>
+	          <li class="nav-item active"><a href="{{route('landing')}}" class="nav-link">Beranda - Rekomendasi</a></li>
 	          <li class="nav-item"><a href="{{route('Daftar_Hotel')}}" class="nav-link">Hotel</a></li>
 	          <li class="nav-item"><a href="{{route('Daftar_Kuliner')}}" class="nav-link">Kuliner</a></li>
 	          <li class="nav-item"><a href="{{route('Daftar_Wisata')}}" class="nav-link">Wisata</a></li>
@@ -81,7 +81,7 @@
             @if (Route::has('login'))
             @auth
             <li class="nav-item">
-              <a class="nav-link" href="{{ route('home') }}">Halaman Utama</a>
+              <a class="nav-link" href="{{ route('landing') }}">Halaman Utama</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Log out</a>

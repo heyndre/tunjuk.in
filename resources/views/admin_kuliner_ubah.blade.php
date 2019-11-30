@@ -4,6 +4,11 @@
 Ubah Tempat Kuliner
 @endsection
 
+@section('page_head')
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"></script>
+@endsection
+
 @section ('Username')
 <?php $nama = Auth::user()->name?>
 <?php echo $nama?>
@@ -86,6 +91,9 @@ Ubah Tempat Kuliner
               <label for="bujurHotel">Koordinat Bujur</label>
               <input type="text" class="form-control" name="bujurKuliner" id="bujurKuliner" placeholder="Longitude" value="{{ $data->longitude}}" required>
             </div>
+            <div class="form-group" id="mapid" style="width: 600px; height: 400px;">
+
+            </div>
             <div class="form-group">
               <label for="tarifAtas">Tarif Atas</label>
               <input type="text" class="form-control" name="tarifAtas" id="tarifAtas" placeholder="Tarif Atas" value="{{ $data->tarif_atas}}" required>
@@ -154,6 +162,42 @@ Ubah Tempat Kuliner
     <!-- /.box -->
 
 </section>
+<script>
+
+    // use below if you want to specify the path for leaflet's images
+    //L.Icon.Default.imagePath = '@Url.Content("~/Content/img/leaflet")';
+    var locate = [{{$data->latitude}}, {{$data->longitude}}];
+    var curLocation = locate;
+    // use below if you have a model
+    // var curLocation = [@Model.Location.Latitude, @Model.Location.Longitude];
+
+    if (curLocation[0] == 0 && curLocation[1] == 0) {
+        curLocation = [-8.2635, 113.6538];
+    }
+
+    var map = L.map('mapid').setView(locate, 20);
+
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    map.attributionControl.setPrefix(false);
+
+    var marker = L.marker(curLocation, {
+        draggable: 'true'
+    });
+
+    marker.on('dragend', function(event) {
+        var position = marker.getLatLng();
+        marker.setLatLng(position, {
+            draggable: 'true'
+        }).bindPopup(position).update();
+        $("#lintangKuliner").val(position.lat);
+        $("#bujurKuliner").val(position.lng).keyup();
+    });
+
+    map.addLayer(marker);
+</script>
 <script>
 function clicked(e)
 {
