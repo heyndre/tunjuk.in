@@ -3,7 +3,7 @@
   @if(Auth::user()->privileged=='0')
     <div class="comment-form-wrap pt-3">
       <h2 class="mb-5">Beri Ulasan</h2>
-      <form role="form" method="POST" action="{{ route('CommentHotel.store', ['CommentHotel' => $data->id])}}" class="p-5 bg-light">
+      <form role="form" method="POST" action="{{ route('CommentWisata.store', ['CommentWisata' => $data->id])}}" class="p-5 bg-light">
         @csrf
         <div class="form-group">
           <label for="tanggalKunjung">Tanggal Kunjungan</label>
@@ -46,9 +46,9 @@
       }
     </script> --}}
   @elseif(Auth::user()->privileged=='1')
-  <h2>Kelola data ulasan hotel<br>dapat dilakukan pada bagian bawah halaman</h2>
+  <h2>Kelola data ulasan wisata<br>dapat dilakukan pada bagian bawah halaman</h2>
   @endif
 @else
-<h2><a href="{{route('login')}}">Login atau Register</a> untuk memberi ulasan terhadap hotel ini! </h2>
+<h2><a href="/login">Login atau Register</a> untuk memberi ulasan terhadap tempat wisata ini! </h2>
 @endauth
 @endif

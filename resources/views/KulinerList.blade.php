@@ -5,7 +5,7 @@ Daftar Tempat Kuliner
 @endsection
 
 @section ('content')
-<div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');">
+<div class="hero-wrap js-fullheight" style="background-image: url('{{asset('images/bg_1.jpg')}}');">
   <div class="overlay"></div>
   <div class="container">
     <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center" data-scrollax-parent="true">
@@ -22,7 +22,7 @@ Daftar Tempat Kuliner
     @foreach ($data as $key => $value)
   <div class="col-sm col-md-6 col-lg-4 ftco-animate">
   		    				<div class="destination">
-  		    					<a href="/Detail_Kuliner/{{$value->id}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url(image/kuliner/{{$value->image}});">
+  		    					<a href="{{route('Detail_Kuliner', $value->id)}}" class="img img-2 d-flex justify-content-center align-items-center" style="background-image: url({{asset('image/kuliner/'.$value->image)}})">
   		    						<div class="icon d-flex justify-content-center align-items-center">
   		    							<span class="icon-link"></span>
   		    						</div>
@@ -32,7 +32,9 @@ Daftar Tempat Kuliner
   		    							<div class="one">
   				    						<h3>{{$value->nama}}</h3>
   				    						<p class="rate">
-  				    							<span>{{$value->kota}}</span>
+												  <span>{{$value->kota}}</span>
+												  <br>
+												  <span>{{$value->jenis_kuliner}}</span>
   				    						</p>
   			    						</div>
   			    						<div class="two">

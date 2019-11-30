@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\WisataModel;
 use Illuminate\Http\Request;
-use App\HotelComment;
-use App\HotelModel;
+use App\WisataComment;
 use Session;
 
-class CommentHotels extends Controller
+class CommentWisata extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,35 +35,35 @@ class CommentHotels extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $hotel_id)
+    public function store(Request $request)
     {
         $this->validate($request, array(
-          'tanggalKunjung' => 'required',
-          'ulasan_singkat' => 'required',
-          'review' => 'required',
-          'user_id' => 'required',
-          'hotel_id' => 'required'
-        ));
-
-        $hotel = HotelModel::find($hotel_id);
-
-        $comment = new HotelComment();
-        $comment->user_id = $request->input('user_id');
-        $comment->hotel_id = $request->input('hotel_id');
-        $comment->tanggal_visitasi = $request->input('tanggalKunjung');
-        $comment->judul = $request->input('ulasan_singkat');
-        $comment->detail = $request->input('review');
-        $comment->approved = true;
-
-        try {
-          $comment->save();
-        } catch (Exception $e) {
-          report($e);
-          return false;
-        }
-        Session::flash('success', 'Review telah ditambahkan');
-
-        return redirect()->route('Detail_Hotel', [$hotel->id]);
+            'tanggalKunjung' => 'required',
+            'ulasan_singkat' => 'required',
+            'review' => 'required',
+            'user_id' => 'required',
+            'wisata_id' => 'required'
+          ));
+  
+          $hotel = WisataModel::find($hotel_id);
+  
+          $comment = new HotelComment();
+          $comment->user_id = $request->input('user_id');
+          $comment->wisata_id = $request->input('wisata_id');
+          $comment->tanggal_visitasi = $request->input('tanggalKunjung');
+          $comment->judul = $request->input('ulasan_singkat');
+          $comment->detail = $request->input('review');
+          $comment->approved = true;
+  
+          try {
+            $comment->save();
+          } catch (Exception $e) {
+            report($e);
+            return false;
+          }
+          Session::flash('success', 'Review telah ditambahkan');
+  
+          return redirect()->route('Hotel.show', [$hotel->id]);
     }
 
     /**

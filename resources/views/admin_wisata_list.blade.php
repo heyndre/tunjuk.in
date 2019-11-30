@@ -62,7 +62,12 @@ Daftar Wisata
             @foreach ($data as $key => $value)
             <tr>
               <th>{{++$number}}</th>
-              <th><img src="{{asset('image/wisata/'.$value->image)}}" height="50px"></th>
+              <th>
+                  <a href="{{ route('Wisata.show', ['Wisata' => $value->id])}}">
+                      <img src="{{asset('image/wisata/'.$value->image)}}" height="50px">                      <br>
+                      Lihat Detail
+                    </a>
+              </th>
               <th>{{$value->category->category_name}}</th>
               <th>{{$value->nama}}</th>
               <th>{{$value->alamat}}</th>

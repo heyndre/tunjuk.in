@@ -26,7 +26,7 @@ Daftar Hotel
       <h3 class="box-title">Kelola Data Hotel</h3>
 
       <div class="box-tools pull-right">
-        <a href="/hotel_admin/create" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Hotel</a>
+        <a href="{{route('hotel_admin.create')}}" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Hotel</a>
         <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
           <i class="fa fa-times"></i></button> -->
       </div>
@@ -64,7 +64,7 @@ Daftar Hotel
             <tr>
               <th>{{++$number}}</th>
               <th>
-                <a href="{{ route('Hotel.show', ['Hotel' => $value->id])}}">
+                <a href="{{ route('hotel_admin.show', ['Hotel' => $value->id])}}">
                 <img src="{{asset('image/hotel/'.$value->image)}}" height="50px">
                 <br>
                 Lihat Detail</a>
@@ -94,9 +94,7 @@ Daftar Hotel
               <th>
                 <a href="{{ route('hotel_admin.edit', ['hotel_admin' => $value->id])}}">Ubah / Hapus</a>
                 <br>
-                <!-- <a href="{{ route('Hotel.show', ['Hotel' => $value->id])}}">Lihat Detail</a> -->
-                <!-- <br> -->
-                <!-- <a href="#" onclick="event.preventDefault(); if(confirm('Konfirmasi Penghapusan Data')) {$('form#hapus').attr('action', '{{ route('hotel_admin.destroy', ['hotel_admin' => $value->id])}}').submit(); location.reload();}">Hapus</a> -->
+ 
               </th>
             @endforeach
           </tbody>

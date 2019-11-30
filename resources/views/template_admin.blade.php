@@ -8,16 +8,16 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   @yield ('page_head')
   <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{{asset('bower_components/bootstrap/dist/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="../../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="{{asset('bower_components/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">
+  <link rel="stylesheet" href="{{asset('bower_components/Ionicons/css/ionicons.min.css')}}">
   <!-- Theme style -->
-  <link rel="stylesheet" href="../../dist/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="{{asset('dist/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="../../dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="{{asset('dist/css/skins/_all-skins.min.css')}}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -240,16 +240,16 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/hotel_admin"><i class="fa fa-circle-o"></i> Hotel</a></li>
-            <li><a href="/wisata_admin"><i class="fa fa-circle-o"></i> Tempat Wisata</a></li>
-            <li><a href="/kuliner_admin"><i class="fa fa-circle-o"></i> Kuliner</a></li>
-            <li><a href="/kategori_admin"><i class="fa fa-circle-o"></i> Kategori</a></li>
+            <li><a href="{{route('hotel_admin.index')}}"><i class="fa fa-circle-o"></i> Hotel</a></li>
+            <li><a href="{{route('wisata_admin.index')}}"><i class="fa fa-circle-o"></i> Tempat Wisata</a></li>
+            <li><a href="{{route('kuliner_admin.index')}}"><i class="fa fa-circle-o"></i> Kuliner</a></li>
+            <li><a href="{{route('kategori_admin.index')}}"><i class="fa fa-circle-o"></i> Kategori</a></li>
             <!-- <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li> -->
           </ul>
         </li>
         <!-- Pengguna -->
         <li>
-          <a href="/pengguna">
+          <a href="pengguna">
             <i class="fa fa-th"></i> <span>Pengguna</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">@yield ('jumlah_pengguna')</small>
@@ -318,17 +318,17 @@
   </footer>
 
 <!-- jQuery 3 -->
-<script src="../../bower_components/jquery/dist/jquery.min.js"></script>
+<script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
 <!-- Bootstrap 3.3.7 -->
-<script src="../../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="{{asset('bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
 <!-- SlimScroll -->
-<script src="../../bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{{asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
-<script src="../../bower_components/fastclick/lib/fastclick.js"></script>
+<script src="{{asset('bower_components/fastclick/lib/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="../../dist/js/demo.js"></script>
+<script src="{{asset('dist/js/demo.js')}}"></script>
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

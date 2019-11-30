@@ -5,7 +5,7 @@ Daftar Hotel
 @endsection
 
 @section ('content')
-<div class="hero-wrap js-fullheight" style="background-image: url('images/bg_1.jpg');">
+<div class="hero-wrap js-fullheight" style="background-image: url('{{asset('images/bg_1.jpg')}}');">
     <div class="overlay"></div>
     <div class="container">
         <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
@@ -26,7 +26,7 @@ Daftar Hotel
             <div class="destination">
                 <a href="/Detail_Hotel/{{$value->id}}"
                     class="img img-2 d-flex justify-content-center align-items-center"
-                    style="background-image: url(image/hotel/{{$value->image}});">
+                    style="background-image: url({{asset('image/hotel/'.$value->image)}})">
                     <div class="icon d-flex justify-content-center align-items-center">
                         <span class="icon-link"></span>
                     </div>
@@ -53,7 +53,7 @@ Daftar Hotel
                     <hr>
                     <p class="bottom-area d-flex">
                         <span><i class="icon-map-o"></i> {{$value->kecamatan}}, {{$value->kota}}</span>
-                        <span class="ml-auto"><a href="/Detail_Hotel/{{$value->id}}">Lihat Detail</a></span>
+                        <span class="ml-auto"><a href="{{route('Detail_Hotel', ['Detail_Hotel' => $value->id])}}">Lihat Detail</a></span>
                     </p>
                 </div>
             </div>
