@@ -19,6 +19,7 @@ class WisataController extends Controller
     {
         $cat = CategoryModel::all();
         $wisata = WisataModel::all();
+//        dd($wisata);
         return view('admin_wisata_list', ['category' => $cat, 'data' => $wisata]);
     }
 

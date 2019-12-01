@@ -45,7 +45,7 @@ class RekomendasiController extends Controller
         $bWisata = $request->input('biayaWisata')/$request->input('person')/$datediff->days;
         $bHotel = $request->input('biayaHotel')/$request->input('person')/$datediff->days;
         $bKuliner = $request->input('biayaKuliner')/$request->input('person')/$datediff->days;
-        dd($bWisata);
+//        dd($bWisata);
         $match = ['category_id' => $request->type];
         $wisata = DB::table('wisata')
         ->where($match)
@@ -61,6 +61,9 @@ class RekomendasiController extends Controller
         $tempKuliner = array();
         $tempHotel = array();
         $tempWisata = array();
+        $cWisata = 0;
+        $cHotel = 0;
+        $cKuliner = 0;
                 foreach ($wisata as $w) {
                     $avgWisata = ($w->tarif_atas + $w->tarif_bawah)/2;
                     if ($avgWisata > $bWisata) {
@@ -97,36 +100,37 @@ class RekomendasiController extends Controller
 //                        dd($avgHotel);
                                 if ($k->tarif_bawah > $bHotel) {
                                 } else {
-                                    $tempHotel[0][] = $k->id;
-                                    $tempHotel[1][] = $result;
+                                    $tempHotel[$cHotel][0] = $k->id;
+                                    $tempHotel[$cHotel][1] = $result;
                                     if ($result <= 1000) {
-                                        $tempHotel[2][] = 100;
+                                        $tempHotel[$cHotel][2] = 100;
                                     } elseif ($result <= 1500) {
-                                        $tempHotel[2][] = 80;
+                                        $tempHotel[$cHotel][2] = 80;
                                     } elseif ($result <= 2000) {
-                                        $tempHotel[2][] = 60;
+                                        $tempHotel[$cHotel][2] = 60;
                                     } else {
-                                        $tempHotel[2][] = 40;
+                                        $tempHotel[$cHotel][2] = 40;
                                     }
                                     if ($avgHotel > 500000) {
-                                        $tempHotel[3][] = 0;
+                                        $tempHotel[$cHotel][3] = 0;
                                     } elseif ($avgHotel <= 200000) {
-                                        $tempHotel[3][] = 100;
+                                        $tempHotel[$cHotel][3] = 100;
                                     } elseif ($avgHotel <= 250000) {
-                                        $tempHotel[3][] = 90;
+                                        $tempHotel[$cHotel][3] = 90;
                                     } elseif ($avgHotel <= 300000) {
-                                        $tempHotel[3][] = 80;
+                                        $tempHotel[$cHotel][3] = 80;
                                     } elseif ($avgHotel <= 350000) {
-                                        $tempHotel[3][] = 70;
+                                        $tempHotel[$cHotel][3] = 70;
                                     } elseif ($avgHotel <= 400000) {
-                                        $tempHotel[3][] = 60;
+                                        $tempHotel[$cHotel][3] = 60;
                                     } elseif ($avgHotel <= 450000) {
-                                        $tempHotel[3][] = 50;
+                                        $tempHotel[$cHotel][3] = 50;
                                     } else {
-                                        $tempHotel[3][] = 40;
+                                        $tempHotel[$cHotel][3] = 40;
                                     }
                                 }
                             }
+                            $cHotel++;
                         }
                         //FIND KULINER
                         foreach ($kuliner as $ky) {
@@ -146,61 +150,64 @@ class RekomendasiController extends Controller
                                 if ($ky->tarif_bawah > $bKuliner) {
                                     echo "fail";
                                 } else {
-                                    $tempKuliner[0][] = $ky->id;
-                                    $tempKuliner[1][] = $resultKuliner;
+                                    $tempKuliner[][0] = $ky->id;
+                                    $tempKuliner[][1] = $resultKuliner;
                                     if ($resultKuliner <= 1000) {
-                                        $tempKuliner[2][] = 100;
+                                        $tempKuliner[][2] = 100;
                                     } elseif ($resultKuliner <= 1500) {
-                                        $tempKuliner[2][] = 80;
+                                        $tempKuliner[][2] = 80;
                                     } elseif ($resultKuliner <= 2000) {
-                                        $tempKuliner[2][] = 60;
+                                        $tempKuliner[][2] = 60;
                                     } else {
-                                        $tempKuliner[2][] = 40;
+                                        $tempKuliner[][2] = 40;
                                     }
                                     if ($avgKuliner > 500000) {
-                                        $tempKuliner[3][] = 0;
+                                        $tempKuliner[][3] = 0;
                                     } elseif ($avgKuliner <= 200000) {
-                                        $tempKuliner[3][] = 100;
+                                        $tempKuliner[][3] = 100;
                                     } elseif ($avgKuliner <= 250000) {
-                                        $tempKuliner[3][] = 90;
+                                        $tempKuliner[][3] = 90;
                                     } elseif ($avgKuliner <= 300000) {
-                                        $tempKuliner[3][] = 80;
+                                        $tempKuliner[][3] = 80;
                                     } elseif ($avgKuliner <= 350000) {
-                                        $tempKuliner[3][] = 70;
+                                        $tempKuliner[][3] = 70;
                                     } elseif ($avgKuliner <= 400000) {
-                                        $tempKuliner[3][] = 60;
+                                        $tempKuliner[][3] = 60;
                                     } elseif ($avgKuliner <= 450000) {
-                                        $tempKuliner[3][] = 50;
+                                        $tempKuliner[][3] = 50;
                                     } else {
-                                        $tempKuliner[3][] = 40;
+                                        $tempKuliner[][3] = 40;
                                     }
                                 }
                             }
                         }
 //                        Echo Hotel
-                        echo "hotel";
-//                print_r($tempHotel);
-                        for ($row = 0; $row < 5; $row++) {
-                            echo "<p><b>Row number $row</b></p>";
-                            echo "<ul>";
-                            for ($col = 0; $col < 2; $col++) {
-                                echo "<li>".$tempHotel[$row][$col]."</li>";
-                            }
-                            echo "</ul>";
-                        }
+                        echo "hotel<br>";
+                print_r($tempHotel);
 //                        Echo Kuliner
-                        echo "kuliner";
-//                    print_r($tempKuliner);
-                        for ($row = 0; $row < 5; $row++) {
-                            echo "<p><b>Row number $row</b></p>";
-                            echo "<ul>";
-                            for ($col = 0; $col < 1; $col++) {
-                                echo "<li>".$tempKuliner[$row][$col]."</li>";
-                            }
-                            echo "</ul>";
+                        echo "<br>kuliner<br>";
+                    print_r($tempKuliner);
+//                    Echo Wisata
+                        echo "<br>wisata<br>";
+                        print_r($tempWisata);
+                    }
+//                    Normalisasi Bobot
+                    $cHotel = (count($tempHotel, COUNT_RECURSIVE) - count($tempHotel))/2;
+                    echo $cHotel."<br>";
+                    $v = sizeof($tempHotel);
+//                    dd($v);
+                    for ($a=0; $a < sizeof($tempHotel); $a++) {
+                        if ($tempHotel[$a][0] == null) {
+
+                        } else {
+                            echo $tempHotel[$a][3]." $a <br>";
+                            $tempHotel[$a][4] = ($tempHotel[$a][3]) * 0.6;
+                            echo $tempHotel[$a][4]." $a <br>";
                         }
+
                     }
                 }
+
             }
 
 
