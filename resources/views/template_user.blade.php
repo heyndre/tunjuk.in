@@ -135,10 +135,10 @@
              <div class="ftco-footer-widget mb-4">
               <h2 class="ftco-heading-2">Experience</h2>
               <ul class="list-unstyled">
-                <li><a href="#" class="py-2 d-block">Rekomendasi</a></li>
-                <li><a href="#" class="py-2 d-block">Hotel</a></li>
-                <li><a href="#" class="py-2 d-block">Kuliner</a></li>
-                <li><a href="#" class="py-2 d-block">Wisata</a></li>
+                <li><a href="{{route('landing')}}" class="py-2 d-block">Rekomendasi</a></li>
+                <li><a href="{{route('Daftar_Hotel')}}" class="py-2 d-block">Hotel</a></li>
+                <li><a href="{{route('Daftar_Kuliner')}}" class="py-2 d-block">Kuliner</a></li>
+                <li><a href="{{route('Daftar_Wisata')}}" class="py-2 d-block">Wisata</a></li>
                 <!-- <li><a href="#" class="py-2 d-block">Nature</a></li>
                 <li><a href="#" class="py-2 d-block">Party</a></li> -->
               </ul>
