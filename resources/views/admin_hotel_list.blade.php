@@ -64,7 +64,7 @@ Daftar Hotel
             <tr>
               <th>{{++$number}}</th>
               <th>
-                <a href="{{ route('hotel_admin.show', ['Hotel' => $value->id])}}">
+                <a href="{{ route('Detail_Hotel', ['id' => $value->id])}}">
                 <img src="{{asset('image/hotel/'.$value->image)}}" height="50px">
                 <br>
                 Lihat Detail</a>

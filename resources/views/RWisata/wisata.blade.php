@@ -46,14 +46,14 @@ Lihat Ulasan Wisata
             <tr>
               <th>{{++$number}}</th>
               <th>
-                <a href="{{ route('Wisata.show', ['Wisata' => $value->id])}}">
+                <a href="{{ route('Detail_Wisata', ['id' => $value->id])}}">
                 <img src="{{asset('image/wisata/'.$value->image)}}" height="80px">
                 <br>
                 Lihat Detail Tempat Wisata</a>
               </th>
               <th>{{$value->nama}}</th>
               <th>
-                <a href="{{ route('ulasan_wisata.show', ['ulasan_wisata' => $value->id])}}">Lihat</a>
+                <a href="{{ route('Detail_Wisata', ['id' => $value->id])}}">Lihat</a>
                 <br>
                 </th>
             @endforeach

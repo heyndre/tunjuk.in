@@ -76,7 +76,7 @@
 	          <li class="nav-item"><a href="{{route('Daftar_Hotel')}}" class="nav-link">Hotel</a></li>
 	          <li class="nav-item"><a href="{{route('Daftar_Kuliner')}}" class="nav-link">Kuliner</a></li>
 	          <li class="nav-item"><a href="{{route('Daftar_Wisata')}}" class="nav-link">Wisata</a></li>
-	          <li class="nav-item"><a href="blog.html" class="nav-link">Masukan</a></li>
+	          {{-- <li class="nav-item"><a href="blog.html" class="nav-link">Masukan</a></li> --}}
 	          <!-- <li class="nav-item"><a href="admin" class="nav-link">Admin</a></li> -->
             @if (Route::has('login'))
             @auth

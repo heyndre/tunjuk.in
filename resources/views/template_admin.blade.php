@@ -248,14 +248,14 @@
           </ul>
         </li>
         <!-- Pengguna -->
-        <li>
+        {{-- <li>
           <a href="pengguna">
             <i class="fa fa-th"></i> <span>Pengguna</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">@yield ('jumlah_pengguna')</small>
             </span>
           </a>
-        </li>
+        </li> --}}
         <!-- Ulasan -->
         <li class="treeview">
           <a href="#">
@@ -266,13 +266,13 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="/ulasan_hotel"><i class="fa fa-circle-o"></i>Ulasan Hotel</a></li>
-            <li><a href="/ulasan_wisata"><i class="fa fa-circle-o"></i>Ulasan Wisata</a></li>
-            <li><a href="/ulasan_kuliner"><i class="fa fa-circle-o"></i>Ulasan Kuliner</a></li>
+            <li><a href="{{route('ulasan_hotel.index')}}"><i class="fa fa-circle-o"></i>Ulasan Hotel</a></li>
+            <li><a href="{{route('ulasan_wisata.index')}}"><i class="fa fa-circle-o"></i>Ulasan Wisata</a></li>
+            <li><a href="{{route('ulasan_kuliner.index')}}"><i class="fa fa-circle-o"></i>Ulasan Kuliner</a></li>
           </ul>
         </li>
         <!--Masukan Pengguna-->
-        <li class="treeview">
+        {{-- <li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i>
             <span>Masukan Pengguna</span>
@@ -284,7 +284,7 @@
             <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> Belum Diverifikasi</a></li>
             <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Sudah Diverifikasi</a></li>
           </ul>
-        </li>
+        </li> --}}
       </ul>
     </section>
     <!-- /.sidebar -->

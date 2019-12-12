@@ -44,7 +44,7 @@ Tambah Hotel
       </div>
 
       <div class="box-body">
-        <form role="form" method="POST" action="/hotel_admin" enctype="multipart/form-data">
+        <form role="form" method="POST" action="{{route('hotel_admin')}}" enctype="multipart/form-data">
           @csrf
           <div class="box-body">
             <div class="form-group">
@@ -95,7 +95,7 @@ Tambah Hotel
                 {{-- <input type="text" class="form-control" name="bujurHotel" id="bujurHotel" placeholder="Longitude" value="{{ $data->longitude}}" required> --}}
               </div>
               <div class="form-group" id="mapid" style="width: 600px; height: 400px;">
-  
+
               </div>
             <div class="form-group">
               <label for="tarifAtas">Tarif Atas</label>
@@ -144,30 +144,30 @@ Tambah Hotel
 
 </section>
 <script>
-  
+
     // use below if you want to specify the path for leaflet's images
     //L.Icon.Default.imagePath = '@Url.Content("~/Content/img/leaflet")';
     var locate = [-8.1737, 113.7005];
     var curLocation = locate;
     // use below if you have a model
     // var curLocation = [@Model.Location.Latitude, @Model.Location.Longitude];
-  
+
     if (curLocation[0] == 0 && curLocation[1] == 0) {
       curLocation = [-8.2635, 113.6538];
     }
-  
+
     var map = L.map('mapid').setView(locate, 20);
-  
+
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
-  
+
     map.attributionControl.setPrefix(false);
-    
+
     var marker = L.marker(curLocation, {
       draggable: 'true'
     });
-   
+
     marker.on('dragend', function(event) {
       var position = marker.getLatLng();
       marker.setLatLng(position, {
@@ -176,7 +176,7 @@ Tambah Hotel
       $("#lintangHotel").val(position.lat);
       $("#bujurHotel").val(position.lng).keyup();
     });
-  
+
     map.addLayer(marker);
   </script>
 @endsection

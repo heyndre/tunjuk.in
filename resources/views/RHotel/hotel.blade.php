@@ -46,18 +46,16 @@ Lihat Ulasan Hotel
             <tr>
               <th>{{++$number}}</th>
               <th>
-                <a href="{{ route('Hotel.show', ['Hotel' => $value->id])}}">
+                <a href="{{ route('Detail_Hotel', ['id' => $value->id])}}">
                 <img src="{{asset('image/hotel/'.$value->image)}}" height="80px">
                 <br>
                 Lihat Detail Hotel</a>
               </th>
               <th>{{$value->nama}}</th>
               <th>
-                <a href="{{ route('ulasan_hotel.show', ['ulasan_hotel' => $value->id])}}">Lihat</a>
+                <a href="{{ route('Detail_Hotel', ['id' => $value->id])}}">Lihat</a>
                 <br>
-                <!-- <a href="{{ route('Hotel.show', ['Hotel' => $value->id])}}">Lihat Detail</a> -->
-                <!-- <br> -->
-                <!-- <a href="#" onclick="event.preventDefault(); if(confirm('Konfirmasi Penghapusan Data')) {$('form#hapus').attr('action', '{{ route('hotel_admin.destroy', ['hotel_admin' => $value->id])}}').submit(); location.reload();}">Hapus</a> -->
+                
               </th>
             @endforeach
           </tbody>

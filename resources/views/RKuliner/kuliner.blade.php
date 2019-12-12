@@ -46,14 +46,14 @@ Lihat Ulasan Kuliner
             <tr>
               <th>{{++$number}}</th>
               <th>
-                <a href="{{ route('Kuliner.show', ['Kuliner' => $value->id])}}">
+                <a href="{{ route('Detail_Kuliner', ['id' => $value->id])}}">
                 <img src="{{asset('image/kuliner/'.$value->image)}}" height="80px">
                 <br>
                 Lihat Detail Tempat Kuliner</a>
               </th>
               <th>{{$value->nama}}</th>
               <th>
-                <a href="{{ route('ulasan_kuliner.show', ['ulasan_kuliner' => $value->id])}}">Lihat</a>
+                <a href="{{ route('Detail_Kuliner', ['id' => $value->id])}}">Lihat</a>
                 <br>
               </th>
             @endforeach

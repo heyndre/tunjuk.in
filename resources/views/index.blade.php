@@ -36,7 +36,15 @@ Beranda
         </div>
       </div> --}}
       <div class="col-md-12 tab-wrap">
-
+          @if (count($errors) > 0)
+              <div class="alert alert-danger">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
         <div class="tab-content p-4 px-5" id="v-pills-tabContent">
 
           <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
@@ -59,7 +67,7 @@ Beranda
                         <label for="#">Tanggal mulai</label>
                         <div class="form-field">
                           <div class="icon"><span class="icon-map-marker"></span></div>
-                          <input type="text" class="form-control checkin_date" placeholder="Mulai" name="checkIn">
+                          <input type="text" class="form-control checkin_date" placeholder="Mulai" id="checkIn" name="checkIn">
                         </div>
                       </div>
                 </div>
@@ -83,7 +91,7 @@ Beranda
                       <label for="#">Tanggal selesai</label>
                       <div class="form-field">
                         <div class="icon"><span class="icon-map-marker"></span></div>
-                        <input type="text" class="form-control checkout_date" placeholder="Selesai" name="checkOut">
+                        <input type="text" class="form-control checkout_date" placeholder="Selesai" id="checkOut" name="checkOut">
                       </div>
                     </div>
                 </div>

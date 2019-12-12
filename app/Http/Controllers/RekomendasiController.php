@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\CategoryModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use DateTime;
+use App\WisataModel;
+use App\HotelModel;
 
 class RekomendasiController extends Controller
 {
@@ -36,186 +39,56 @@ class RekomendasiController extends Controller
      */
     public function store(Request $request)
     {
+        $messages = [
+            'after:yesterday' => ':Tanggal anda tidak sesuai',
+            'after_or_equal:checkIn' => ':Tanggal Selesai tidak boleh kurang dari Tanggal Mulai'
+        ];
+        $this->validate($request,[
+            'checkIn' => 'after:yesterday',
+            'checkOut' => 'after_or_equal:checkIn'
+        ],$messages);
+        $person = $request->input('person');
         $start = date( 'm/d/Y', strtotime($request->input('checkIn')));
         $str = new DateTime($start);
         $finish = date('m/d/Y', strtotime($request->input('checkOut')));
         $fin = new DateTime($finish);
         $datediff = date_diff($str, $fin);
 //        dd($datediff);
-        $bWisata = $request->input('biayaWisata')/$request->input('person')/$datediff->days;
-        $bHotel = $request->input('biayaHotel')/$request->input('person')/$datediff->days;
-        $bKuliner = $request->input('biayaKuliner')/$request->input('person')/$datediff->days;
+        if ($datediff->days == '0') {
+            $bWisata = $request->input('biayaWisata')/$person;
+            $bHotel = $request->input('biayaHotel')/$person;
+            $bKuliner = $request->input('biayaKuliner')/$person;
+        } else {
+            $bWisata = $request->input('biayaWisata')/$person/$datediff->days;
+            $bHotel = $request->input('biayaHotel')/$person/$datediff->days;
+            $bKuliner = $request->input('biayaKuliner')/$person/$datediff->days;
+        }
 //        dd($bWisata);
         $match = ['category_id' => $request->type];
-        $wisata = DB::table('wisata')
-        ->where($match)
-        ->get();
-        $hotel = DB::table('hotel')
+        $wisata = WisataModel::where($match)->get();
+        $hasil = DB::table('wisata')
+            ->where('category_id','=', $request->type)
+            ->where('verified', '=', '1')
+            ->where('tarif_atas', '<=', $request->biayaWisata)
             ->get();
-        $match2 = ['verified' => '1'];
-        $kuliner = DB::table('kuliner')
-            ->where($match2)
-            ->get();
-        $earthRadius = 6371000;
-        $diff = array();
-        $tempKuliner = array();
-        $tempHotel = array();
-        $tempWisata = array();
-        $cWisata = 0;
-        $cHotel = 0;
-        $cKuliner = 0;
-                foreach ($wisata as $w) {
-                    $avgWisata = ($w->tarif_atas + $w->tarif_bawah)/2;
-                    if ($avgWisata > $bWisata) {
-                    } else {
-                        $tempWisata[0][] = $w->id;
-                        if ($avgWisata > 125000) {
-                            $tempWisata[1][] = 0;
-                        } elseif ($avgWisata <= 25000) {
-                            $tempWisata[1][] = 100;
-                        } elseif ($avgWisata <= 50000) {
-                            $tempWisata[1][] = 80;
-                        } elseif ($avgWisata <= 75000) {
-                            $tempWisata[1][] = 60;
-                        } elseif ($avgWisata <= 100000) {
-                            $tempWisata[1][] = 40;
-                        } else {
-                            $tempWisata[1][] = 20;
-                        }
-                        //SET STARTING POINT TO CALCULATE DISTANCE
-                        $latFrom = deg2rad(floatval($w->latitude));
-                        $lonFrom = deg2rad(floatval($w->longitude));
-                        //FIND HOTEL
-                        foreach ($hotel as $k) {
-                            $latTo = deg2rad(floatval($k->latitude));
-                            $lonTo = deg2rad(floatval($k->longitude));
-                            $latDelta = $latTo - $latFrom;
-                            $lonDelta = $lonTo - $lonFrom;
-                            $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
-                                    cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
-                            $result = $angle * $earthRadius;
-                            if ($result > 2500) {
-                            } else {
-                                $avgHotel = ($k->tarif_atas + $k->tarif_bawah)/2;
-//                        dd($avgHotel);
-                                if ($k->tarif_bawah > $bHotel) {
-                                } else {
-                                    $tempHotel[$cHotel][0] = $k->id;
-                                    $tempHotel[$cHotel][1] = $result;
-                                    if ($result <= 1000) {
-                                        $tempHotel[$cHotel][2] = 100;
-                                    } elseif ($result <= 1500) {
-                                        $tempHotel[$cHotel][2] = 80;
-                                    } elseif ($result <= 2000) {
-                                        $tempHotel[$cHotel][2] = 60;
-                                    } else {
-                                        $tempHotel[$cHotel][2] = 40;
-                                    }
-                                    if ($avgHotel > 500000) {
-                                        $tempHotel[$cHotel][3] = 0;
-                                    } elseif ($avgHotel <= 200000) {
-                                        $tempHotel[$cHotel][3] = 100;
-                                    } elseif ($avgHotel <= 250000) {
-                                        $tempHotel[$cHotel][3] = 90;
-                                    } elseif ($avgHotel <= 300000) {
-                                        $tempHotel[$cHotel][3] = 80;
-                                    } elseif ($avgHotel <= 350000) {
-                                        $tempHotel[$cHotel][3] = 70;
-                                    } elseif ($avgHotel <= 400000) {
-                                        $tempHotel[$cHotel][3] = 60;
-                                    } elseif ($avgHotel <= 450000) {
-                                        $tempHotel[$cHotel][3] = 50;
-                                    } else {
-                                        $tempHotel[$cHotel][3] = 40;
-                                    }
-                                }
-                            }
-                            $cHotel++;
-                        }
-                        //FIND KULINER
-                        foreach ($kuliner as $ky) {
-//                        dd($kuliner);
-                            $latToK = deg2rad(floatval($ky->latitude));
-                            $lonToK = deg2rad(floatval($ky->longitude));
-                            $latDeltaK = $latToK - $latFrom;
-                            $lonDeltaK = $lonToK - $lonFrom;
-                            $angleKuliner = 2 * asin(sqrt(pow(sin($latDeltaK / 2), 2) +
-                                    cos($latFrom) * cos($latToK) * pow(sin($lonDeltaK / 2), 2)));
-                            $resultKuliner = $angleKuliner * $earthRadius;
-//                        dd($resultKuliner);
-                            if ($resultKuliner > 2500) {
-                            } else {
-                                $avgKuliner = ($ky->tarif_atas + $ky->tarif_bawah)/2;
-//                        dd($avgKuliner);
-                                if ($ky->tarif_bawah > $bKuliner) {
-                                    echo "fail";
-                                } else {
-                                    $tempKuliner[][0] = $ky->id;
-                                    $tempKuliner[][1] = $resultKuliner;
-                                    if ($resultKuliner <= 1000) {
-                                        $tempKuliner[][2] = 100;
-                                    } elseif ($resultKuliner <= 1500) {
-                                        $tempKuliner[][2] = 80;
-                                    } elseif ($resultKuliner <= 2000) {
-                                        $tempKuliner[][2] = 60;
-                                    } else {
-                                        $tempKuliner[][2] = 40;
-                                    }
-                                    if ($avgKuliner > 500000) {
-                                        $tempKuliner[][3] = 0;
-                                    } elseif ($avgKuliner <= 200000) {
-                                        $tempKuliner[][3] = 100;
-                                    } elseif ($avgKuliner <= 250000) {
-                                        $tempKuliner[][3] = 90;
-                                    } elseif ($avgKuliner <= 300000) {
-                                        $tempKuliner[][3] = 80;
-                                    } elseif ($avgKuliner <= 350000) {
-                                        $tempKuliner[][3] = 70;
-                                    } elseif ($avgKuliner <= 400000) {
-                                        $tempKuliner[][3] = 60;
-                                    } elseif ($avgKuliner <= 450000) {
-                                        $tempKuliner[][3] = 50;
-                                    } else {
-                                        $tempKuliner[][3] = 40;
-                                    }
-                                }
-                            }
-                        }
-//                        Echo Hotel
-                        echo "hotel<br>";
-                print_r($tempHotel);
-//                        Echo Kuliner
-                        echo "<br>kuliner<br>";
-                    print_r($tempKuliner);
-//                    Echo Wisata
-                        echo "<br>wisata<br>";
-                        print_r($tempWisata);
-                    }
-//                    Normalisasi Bobot
-                    $cHotel = (count($tempHotel, COUNT_RECURSIVE) - count($tempHotel))/2;
-                    echo $cHotel."<br>";
-                    $v = sizeof($tempHotel);
-//                    dd($v);
-                    for ($a=0; $a < sizeof($tempHotel); $a++) {
-                        if ($tempHotel[$a][0] == null) {
-
-                        } else {
-                            echo $tempHotel[$a][3]." $a <br>";
-                            $tempHotel[$a][4] = ($tempHotel[$a][3]) * 0.6;
-                            echo $tempHotel[$a][4]." $a <br>";
-                        }
-
-                    }
-                }
-
+        $kat = CategoryModel::all();
+        $input = array(
+            'bWisata' =>$bWisata,
+            'bHotel' => $bHotel,
+            'bKuliner' => $bKuliner,
+            'biayaWisata' => $request->input('biayaWisata'),
+            'biayaHotel' => $request->input('biayaHotel'),
+            'biayaKuliner' => $request->input('biayaKuliner'),
+            'person' => $person,
+            'start' => $start,
+            'finish' => $finish,
+            'durasi' => $datediff->days,
+            'kategori' => $request->type
+        );
+//        dd($this->budgetWisata);
+//        dd($input);
+        return view('rekomen.list_rekomen',[ 'wisata' => $hasil, 'category' => $kat])->with('input', $input);
             }
-
-
-
-        // dd($request);
-        // dd($wisata);
-//        return view('rekomen.list_rekomen');
-
 
     // Haversine Formula for calculating distance
     function haversineGreatCircleDistance(
@@ -235,15 +108,76 @@ class RekomendasiController extends Controller
         return $angle * $earthRadius;
       }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function rekHotel( Request $input)
     {
-        //
+//        dd($input);
+        $messages = [
+            'after:yesterday' => ':Tanggal anda tidak sesuai',
+            'after_or_equal:checkIn' => ':Tanggal Selesai tidak boleh kurang dari Tanggal Mulai'
+        ];
+        $this->validate($input,[
+            'checkIn' => 'after:yesterday',
+            'checkOut' => 'after_or_equal:checkIn'
+        ],$messages);
+        $id = $input->WisataID;
+        $hasil = DB::table('wisata as w')
+            ->join('hotel as h', 'h.kota', '=', 'w.kota')
+            ->select('w.*', 'h.*', DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(h.latitude))
+                      * cos(radians(h.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(h.latitude))) AS distance"))
+            ->where('w.id','=',$id)
+            ->where('h.verified', '=', '1')
+            ->where('h.tarif_atas', '<=', $input->biayaHotel)
+            ->where(DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(h.latitude))
+                      * cos(radians(h.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(h.latitude)))"), '<=', '2500')
+            ->orderBy("distance")
+            ->get();
+        $kat = CategoryModel::all();
+//        dd($input);
+//         dd($hasil);
+//        dd($id);
+        return view('rekomen.list_rekomen_hotel', ['hasil' => $hasil, 'category' => $kat])->with('input', $input);
+    }
+
+    public function kuliner(Request $input) {
+//        dd($input);
+        $messages = [
+            'after:yesterday' => ':Tanggal anda tidak sesuai',
+            'after_or_equal:checkIn' => ':Tanggal Selesai tidak boleh kurang dari Tanggal Mulai'
+        ];
+        $this->validate($input,[
+            'checkIn' => 'after:yesterday',
+            'checkOut' => 'after_or_equal:checkIn'
+        ],$messages);
+        $id = $input->HotelID;
+        $hasil = DB::table('wisata as w')
+            ->join('kuliner as k', 'k.kota', '=', 'w.kota')
+            ->select('w.*', 'k.*',
+                DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(k.latitude))
+                      * cos(radians(k.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(k.latitude))) AS distance"))
+            ->where('w.id','=',$id)
+            ->where('k.verified', '=', '1')
+            ->where('k.tarif_atas', '<=', $input->biayaKuliner)
+            ->where(DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(k.latitude))
+                      * cos(radians(k.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(k.latitude)))"), '<=', '2500')
+            ->orderBy("distance")
+            ->get();
+        $kat = CategoryModel::all();
+//        dd($input);
+//         dd($hasil);
+//        dd($id);
+        return view('rekomen.list_rekomen_kuliner', ['hasil' => $hasil, 'category' => $kat])->with('input', $input);
     }
 
     /**
@@ -252,29 +186,123 @@ class RekomendasiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function final(Request $input)
     {
-        //
+//        $assJarakKuliner=0;
+//        $assJarakHotel=0;
+//        $assBiayaKuliner=0;
+//        $assBiayaHotel=0;
+//        $assBiayaWisata=0;
+//        $accWisata='';
+//        $accKuliner='';
+//        $accHotel='';
+        if (is_null($input->WisataID)) {
+            return redirect('landing');
+        } else {
+            $accWisata = DB::table('wisata')->where('id', '=', $input->WisataID)->first();
+            if (is_null($input->HotelID)) {
+
+            } else {
+                $accHotel = DB::table('hotel')->where('id', '=', $input->HotelID)->first();
+            }
+            if (is_null($input->KulinerID)) {
+
+            } else {
+                $accKuliner = DB::table('kuliner')->where('id', '=', $input->KulinerID)->first();
+            }
+        }
+        //Penilaian dan Pembobotan Jarak Hotel terhadap Tempat Wisata
+        if ($input->jarakHotel > 0) {
+            if ($input->jarakHotel <= 1000) {
+                $assJarakHotel = 100*0.6;
+            } elseif ($input->jarakHotel <= 1500) {
+                $assJarakHotel = 80*0.6;
+            } elseif ($input->jarakHotel <= 2000) {
+                $assJarakHotel = 60*0.6;
+            } elseif ($input->jarakHotel <= 2500) {
+                $assJarakHotel = 40*0.6;
+            } else {
+                $assJarakHotel = 0;
+            }
+        }
+        //Penilaian dan Pembobotan Jarak Kuliner terhadap Tempat Wisata
+        if ($input->jarakKuliner > 0) {
+            if ($input->jarakKuliner <= 1000) {
+                $assJarakKuliner = 100*0.6;
+            } elseif ($input->jarakKuliner <= 1500) {
+                $assJarakKuliner = 80*0.6;
+            } elseif ($input->jarakKuliner <= 2000) {
+                $assJarakKuliner = 60*0.6;
+            } elseif ($input->jarakKuliner <= 2500) {
+                $assJarakKuliner = 40*0.6;
+            } else {
+                $assJarakKuliner = 0;
+            }
+        }
+        //Penilaian dan Pembobotan tarif Kuliner
+        if ($input->biayaKuliner > 0) {
+            if ($input->costKuliner <= 35000) {
+                $assBiayaKuliner = 100*0.1;
+            } elseif ($input->costKuliner <= 60000) {
+                $assBiayaKuliner = 80*0.1;
+            } elseif ($input->costKuliner <= 85000) {
+                $assBiayaKuliner = 60*0.1;
+            } elseif ($input->costKuliner <= 105000) {
+                $assBiayaKuliner = 40*0.1;
+            } elseif ($input->costKuliner <= 125000) {
+                $assBiayaKuliner = 20*0.1;
+            } else {
+                $assBiayaKuliner = 0;
+            }
+        }
+        //Penilaian tarif Hotel
+        if ($input->biayaHotel > 0) {
+            if ($input->costHotel <= 35000) {
+                $assBiayaHotel = 100*0.1;
+            } elseif ($input->costHotel <= 60000) {
+                $assBiayaHotel = 80*0.1;
+            } elseif ($input->costHotel <= 85000) {
+                $assBiayaHotel = 60*0.1;
+            } elseif ($input->costHotel <= 105000) {
+                $assBiayaHotel = 40*0.1;
+            } elseif ($input->costHotel <= 125000) {
+                $assBiayaHotel = 20*0.1;
+            } else {
+                $assBiayaHotel = 0;
+            }
+        }
+        //Penilaian tarif Wisata
+        if ($input->biayaWisata > 0) {
+            if ($input->costWisata <= 35000) {
+                $assBiayaWisata = 100*0.2;
+            } elseif ($input->costWisata <= 60000) {
+                $assBiayaWisata = 80*0.2;
+            } elseif ($input->costWisata <= 85000) {
+                $assBiayaWisata = 60*0.2;
+            } elseif ($input->costWisata <= 105000) {
+                $assBiayaWisata = 40*0.2;
+            } elseif ($input->costWisata <= 125000) {
+                $assBiayaWisata = 20*0.2;
+            } else {
+                $assBiayaWisata = 0;
+            }
+        }
+        //NILAI AKHIR
+        $accJarak = ($assJarakHotel + $assJarakKuliner)/2;
+        $accRekomen = $assBiayaWisata + $assBiayaHotel + $assBiayaKuliner + $accJarak;
+        $kat = CategoryModel::all();
+//        dd($accHotel);
+        return view('rekomen.final', ['rekom' => $accRekomen, 'hasilWisata' => $accWisata, 'hasilHotel' => $accHotel, 'hasilKuliner' => $accKuliner, 'category' => $kat])->with('input', $input);
+//        dd($accHotel);
+//        echo $accWisata;
+//        echo $accKuliner;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

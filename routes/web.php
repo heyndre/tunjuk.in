@@ -61,5 +61,8 @@ Route::get('migrate-reset', function() {
 });
 
 Route::resource('rekomendasi', 'RekomendasiController');
+Route::post('rekomendasi.kuliner', 'RekomendasiController@kuliner')->name('rekomendasi.kuliner');
+Route::post('rekomendasi.rekHotel', 'RekomendasiController@rekHotel')->name('rekomendasi.rekHotel');
+Route::post('rekomendasi.final', 'RekomendasiController@final')->name('rekomendasi.final');
 
 Route::get('test', 'RekomendasiController@index')->name('test');
