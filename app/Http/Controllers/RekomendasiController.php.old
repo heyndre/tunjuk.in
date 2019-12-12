@@ -1,0 +1,262 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\CategoryModel;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use DateTime;
+use App\WisataModel;
+use App\HotelModel;
+
+class RekomendasiController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('rekomen.list_rekomen');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $person = $request->input('person');
+        $start = date( 'm/d/Y', strtotime($request->input('checkIn')));
+        $str = new DateTime($start);
+        $finish = date('m/d/Y', strtotime($request->input('checkOut')));
+        $fin = new DateTime($finish);
+        $datediff = date_diff($str, $fin);
+//        dd($datediff);
+        if ($datediff->days == '0') {
+            $bWisata = $request->input('biayaWisata')/$person;
+            $bHotel = $request->input('biayaHotel')/$person;
+            $bKuliner = $request->input('biayaKuliner')/$person;
+        } else {
+            $bWisata = $request->input('biayaWisata')/$person/$datediff->days;
+            $bHotel = $request->input('biayaHotel')/$person/$datediff->days;
+            $bKuliner = $request->input('biayaKuliner')/$person/$datediff->days;
+        }
+//        dd($bWisata);
+        $match = ['category_id' => $request->type];
+        $wisata = WisataModel::where($match)->get();
+        $hotel = DB::table('hotel')
+            ->get();
+        $match2 = ['verified' => '1'];
+        $kuliner = DB::table('kuliner')
+            ->where($match2)
+            ->get();
+        $earthRadius = 6371000;
+        $diff = array();
+        $tempKuliner = array();
+        $tempHotel = array();
+        $tempWisata = array();
+        $cWisata = 0;
+        $cHotel = 0;
+        $cKuliner = 0;
+                foreach ($wisata as $w) {
+                    $avgWisata = ($w->tarif_atas + $w->tarif_bawah) / 2;
+//                    dd($avgWisata);
+                    if ($avgWisata > $bWisata) {
+                    } else {
+                        $tempWisata[$cWisata][0] = $w->id;
+                        if ($avgWisata > 125000) {
+                            $tempWisata[$cWisata][1] = 0;
+                        } elseif ($avgWisata <= 25000) {
+                            $tempWisata[$cWisata][1] = 100;
+                        } elseif ($avgWisata <= 50000) {
+                            $tempWisata[$cWisata][1] = 80;
+                        } elseif ($avgWisata <= 75000) {
+                            $tempWisata[$cWisata][1] = 60;
+                        } elseif ($avgWisata <= 100000) {
+                            $tempWisata[$cWisata][1] = 40;
+                        } else {
+                            $tempWisata[$cWisata][1] = 20;
+                        }
+                    }
+                }
+//                    Echo Wisata
+//                        echo "<br>wisata<br>";
+//                        print_r($tempWisata);
+
+//                    Normalisasi Bobot Wisata
+//        echo "Bobot Wisata";
+//        echo $cWisata."<br>";
+        $v = sizeof($tempWisata);
+//                    dd($tempWisata);
+//        for ($a=0; $a < sizeof($tempWisata); $a++) {
+//            if ($tempWisata[$a][0] == null) {
+//
+//            } else {
+//                echo $tempWisata[$a][1]." $a <br>";
+//                $foo = '';
+//                settype($foo, "float");
+//                $foo = ($tempWisata[$a][1]) * 0.2;
+//                echo $foo."<br>";
+//                $tempWisata[$a][2] = $foo;
+//                echo $tempWisata[$a][2]." $a <br>";
+//            }
+//        }
+        $dataWisata = array();
+        $ct = 0;
+        for ($ct=0; $ct < sizeof($tempWisata); $ct++) {
+            $id = $tempWisata[$ct][0];
+//            dd($id);
+            $dW = WisataModel::find($id)->get();
+//            dd($dW);
+            $idH = array();
+            foreach ($dW as $dW) {
+                $dataWisata [$ct][0] = $dW->id;
+                $dataWisata [$ct][1] = $dW->nama;
+                $dataWisata [$ct][2] = $dW->alamat;
+                $dataWisata [$ct][4] = '';
+//                dd($dataWisata);
+            }
+        }
+        $idW = array();
+        $cnt=0;
+        for ($cnt=0; $cnt < sizeof($dataWisata); $cnt++) {
+            $idW[] = $dataWisata[$cnt][0];
+        }
+//        dd($idW);
+        $dest = WisataModel::where('id', '=', $idW)->get();
+//        dd($dest);
+        $kat = CategoryModel::all();
+        $input = array(
+            'biayaWisata' => $bWisata,
+            'biayaHotel' => $bHotel,
+            'biayaKuliner' => $bKuliner,
+            'person' => $person,
+            'start' => $start,
+            'finish' => $finish,
+            'durasi' => $datediff
+        );
+//        dd($this->budgetWisata);
+//        dd($input);
+        return view('rekomen.list_rekomen',[ 'wisata' => $dest, 'category' => $kat])->with('input', $input);
+            }
+
+    // Haversine Formula for calculating distance
+    function haversineGreatCircleDistance(
+        $latitudeFrom, $longitudeFrom, $latitudeTo, $longitudeTo, $earthRadius = 6371000)
+      {
+        // convert from degrees to radians
+        $latFrom = deg2rad($latitudeFrom);
+        $lonFrom = deg2rad($longitudeFrom);
+        $latTo = deg2rad($latitudeTo);
+        $lonTo = deg2rad($longitudeTo);
+
+        $latDelta = $latTo - $latFrom;
+        $lonDelta = $lonTo - $lonFrom;
+
+        $angle = 2 * asin(sqrt(pow(sin($latDelta / 2), 2) +
+          cos($latFrom) * cos($latTo) * pow(sin($lonDelta / 2), 2)));
+        return $angle * $earthRadius;
+      }
+
+    public function rekHotel( Request $input)
+    {
+//        dd($input);
+        $id = $input->WisataID;
+        $hasil = DB::table('wisata as w')
+            ->join('hotel as h', 'h.kota', '=', 'w.kota')
+            ->select('w.*', 'h.*', DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(h.latitude))
+                      * cos(radians(h.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(h.latitude))) AS distance"))
+            ->where('w.id','=',$id)
+            ->where('h.verified', '=', '1')
+            ->where(DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(h.latitude))
+                      * cos(radians(h.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(h.latitude)))"), '<=', '2500')
+            ->orderBy("distance")
+            ->get();
+        $kat = CategoryModel::all();
+//        dd($input);
+//         dd($hasil);
+//        dd($id);
+        return view('rekomen.list_rekomen_hotel', ['hasil' => $hasil, 'category' => $kat])->with('input', $input);
+    }
+
+    public function kuliner(Request $input) {
+//        dd($input);
+        $id = $input->HotelID;
+        $hasil = DB::table('wisata as w')
+            ->join('kuliner as k', 'k.kota', '=', 'w.kota')
+            ->select('w.*', 'k.*',
+                DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(k.latitude))
+                      * cos(radians(k.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(k.latitude))) AS distance"))
+            ->where('w.id','=',$id)
+            ->where('k.verified', '=', '1')
+            ->where(DB::raw("6371000 * acos(cos(radians(w.latitude))
+                      * cos(radians(k.latitude))
+                      * cos(radians(k.longitude) - radians(w.longitude))
+                      + sin(radians(w.latitude))
+                      * sin(radians(k.latitude)))"), '<=', '2500')
+            ->orderBy("distance")
+            ->get();
+        $kat = CategoryModel::all();
+//        dd($input);
+//         dd($hasil);
+//        dd($id);
+        return view('rekomen.list_rekomen_kuliner', ['hasil' => $hasil, 'category' => $kat])->with('input', $input);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function final(Request $input)
+    {
+        dd($input);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}
