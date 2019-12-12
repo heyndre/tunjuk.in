@@ -33,7 +33,7 @@ Tambah Hotel
       <h3 class="box-title">Kelola Data Hotel</h3>
 
       <div class="box-tools pull-right">
-        <a href="/hotel_admin" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i>Batal</a>
+        <a href="{{route('hotel_admin.index')}}" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i>Batal</a>
         <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
           <i class="fa fa-times"></i></button> -->
       </div>
@@ -44,7 +44,7 @@ Tambah Hotel
       </div>
 
       <div class="box-body">
-        <form role="form" method="POST" action="{{route('hotel_admin')}}" enctype="multipart/form-data">
+        <form role="form" method="POST" action="{{route('hotel_admin.store')}}" enctype="multipart/form-data">
           @csrf
           <div class="box-body">
             <div class="form-group">

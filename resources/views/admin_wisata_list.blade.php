@@ -26,7 +26,7 @@ Daftar Wisata
       <h3 class="box-title">Kelola Data Tempat Wisata</h3>
 
       <div class="box-tools pull-right">
-        <a href="/wisata_admin/create" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Tempat Wisata</a>
+        <a href="{{route('wisata_admin.create')}}" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Tempat Wisata</a>
         <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
           <i class="fa fa-times"></i></button> -->
       </div>

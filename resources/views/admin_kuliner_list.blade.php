@@ -26,7 +26,7 @@ Daftar Tempat Kuliner
       <h3 class="box-title">Kelola Data Tempat Kuliner</h3>
 
       <div class="box-tools pull-right">
-        <a href="/kuliner_admin/create" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Tempat Kuliner</a>
+        <a href="{{route('kuliner_admin.create')}}" class="btn btn-box-tool"><i class="fa fa-plus-circle"></i> Tambah Tempat Kuliner</a>
         <!-- <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
           <i class="fa fa-times"></i></button> -->
       </div>

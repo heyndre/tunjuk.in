@@ -182,41 +182,41 @@ Ubah Tempat Wisata
 
 </section>
 <script>
+  
+  // use below if you want to specify the path for leaflet's images
+  //L.Icon.Default.imagePath = '@Url.Content("~/Content/img/leaflet")';
+  var locate = [{{$data->latitude}}, {{$data->longitude}}];
+  var curLocation = locate;
+  // use below if you have a model
+  // var curLocation = [@Model.Location.Latitude, @Model.Location.Longitude];
 
-    // use below if you want to specify the path for leaflet's images
-    //L.Icon.Default.imagePath = '@Url.Content("~/Content/img/leaflet")';
-    var locate = [{{$data->latitude}}, {{$data->longitude}}];
-    var curLocation = locate;
-    // use below if you have a model
-    // var curLocation = [@Model.Location.Latitude, @Model.Location.Longitude];
+  if (curLocation[0] == 0 && curLocation[1] == 0) {
+    curLocation = [-8.2635, 113.6538];
+  }
 
-    if (curLocation[0] == 0 && curLocation[1] == 0) {
-      curLocation = [-8.2635, 113.6538];
-    }
+  var map = L.map('mapid').setView(locate, 20);
 
-    var map = L.map('mapid').setView(locate, 20);
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
 
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
+  map.attributionControl.setPrefix(false);
 
-    map.attributionControl.setPrefix(false);
-
-    var marker = L.marker(curLocation, {
+  var marker = L.marker(curLocation, {
+    draggable: 'true'
+  });
+ 
+  marker.on('dragend', function(event) {
+    var position = marker.getLatLng();
+    marker.setLatLng(position, {
       draggable: 'true'
-    });
+    }).bindPopup(position).update();
+    $("#lintangWisata").val(position.lat);
+    $("#bujurWisata").val(position.lng).keyup();
+  });
 
-    marker.on('dragend', function(event) {
-      var position = marker.getLatLng();
-      marker.setLatLng(position, {
-        draggable: 'true'
-      }).bindPopup(position).update();
-      $("#lintangWisata").val(position.lat);
-      $("#bujurWisata").val(position.lng).keyup();
-    });
-
-    map.addLayer(marker);
-  </script>
+  map.addLayer(marker);
+</script>
 <script>
 function clicked(e)
 {
